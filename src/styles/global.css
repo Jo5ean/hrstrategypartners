@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 84px; }
+body { margin: 0; -webkit-font-smoothing: antialiased; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { transition: all .3s cubic-bezier(.4,0,.2,1); }
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(27,78,159,.16);
+}
+
+.brand-sym {
+  background: linear-gradient(135deg, #1B4E9F 0%, #7B5CC4 55%, #C84FAE 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s cubic-bezier(0,0,.2,1), transform .6s cubic-bezier(0,0,.2,1);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}

@@ -1,0 +1,101 @@
+---
+const extras = [
+  { num: '-35/50', unit: '%', accent: '#7FB0F5', title: 'Rotación Crítica', sub: 'verificable · 90 días' },
+  { num: '+20', unit: '%', accent: '#B39DEB', title: 'Productividad del equipo', sub: 'kpi auditado · mes 3' },
+  { num: '15', unit: 'hs', accent: '#EE8FD2', title: 'Liberadas en gestión directiva', sub: 'por semana · en promedio' },
+  { num: 'D', unit: '1', accent: '#7FB0F5', title: 'ROI verificable', sub: 'desde el primer día de intervención' }
+];
+---
+<section
+  id="inicio"
+  class="relative min-h-[100svh] flex flex-col pt-[clamp(88px,13svh,148px)] px-4 sm:px-8 lg:px-16 pb-[clamp(90px,10.5svh,112px)] bg-[#0C1630] overflow-hidden isolate"
+>
+  <video
+    data-hero-video
+    autoplay
+    muted
+    loop
+    playsinline
+    src="/videos/hr-hero.mp4"
+    class="absolute inset-0 w-full h-full object-cover z-[1]"
+  ></video>
+  <div class="absolute inset-0 z-[2] pointer-events-none bg-[rgba(12,22,48,.65)]"></div>
+  <div class="absolute left-0 right-0 bottom-0 h-[62%] z-[3] pointer-events-none bg-[linear-gradient(to_top,rgba(12,22,48,.92)_6%,rgba(12,22,48,0))]"></div>
+
+  <div class="relative z-10 pointer-events-none flex-1 flex flex-col justify-center w-full max-w-[1200px] mx-auto animate-fadeUp">
+    <h1 class="m-0 max-w-[20ch] text-[clamp(32px,min(4.2vw,6.4svh),56px)] font-bold leading-[1.04] tracking-[-2.4px] text-white [text-wrap:balance]">
+      Talentos que producen.<br />Sistemas que perduran.
+    </h1>
+    <p class="mt-[clamp(12px,2svh,20px)] max-w-[46ch] text-[17px] leading-[1.6] text-white/[.86] [text-wrap:pretty]">
+      Dirección estratégica de capital humano para PyMEs en escala. ROI verificable desde el primer día.
+    </p>
+    <div class="flex flex-wrap gap-3 mt-[clamp(16px,3svh,28px)] pointer-events-auto">
+      <a
+        href="#servicios"
+        class="px-[34px] py-[19px] rounded-full bg-[#F06FCB] text-[#0C1630] font-bold text-[15px] shadow-[0_16px_48px_rgba(240,111,203,.4)] hover:bg-[#EA57BE] hover:-translate-y-0.5 transition"
+        >Ver servicios</a
+      >
+    </div>
+  </div>
+
+  <div class="relative z-10 flex-none w-full max-w-[1200px] mx-auto mt-[clamp(16px,2.6svh,32px)]">
+    <div class="grid gap-[clamp(12px,1.4vw,18px)] max-w-[1020px]" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+      <div class="relative rounded-[18px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        <div class="flex items-baseline gap-0.5">
+          <span data-count="-45" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">-45</span>
+          <span class="text-[22px] font-extrabold leading-none text-white">%</span>
+        </div>
+        <div class="h-1 rounded-full bg-white/[.22] mt-[clamp(9px,1.1svh,12px)] overflow-hidden">
+          <div data-bar data-bar-from="100" data-bar-to="45" class="w-[45%] h-full rounded-full bg-[#7FB0F5]"></div>
+        </div>
+        <p class="mt-[clamp(9px,1.2svh,12px)] text-[13px] leading-[1.3] font-semibold tracking-[-.2px] text-white [text-wrap:pretty]">Reducción promedio de rotación crítica en primeros 6 meses</p>
+      </div>
+      <div class="relative rounded-[18px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        <div class="flex items-baseline gap-0.5">
+          <span data-count="28" data-count-prefix="+" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">+28</span>
+          <span class="text-[22px] font-extrabold leading-none text-white">%</span>
+        </div>
+        <div class="h-1 rounded-full bg-white/[.22] mt-[clamp(9px,1.1svh,12px)] overflow-hidden">
+          <div data-bar data-bar-from="0" data-bar-to="28" class="w-[28%] h-full rounded-full bg-[#B39DEB]"></div>
+        </div>
+        <p class="mt-[clamp(9px,1.2svh,12px)] text-[13px] leading-[1.3] font-semibold tracking-[-.2px] text-white [text-wrap:pretty]">Incremento de productividad directiva documentado</p>
+      </div>
+      <div class="relative rounded-[18px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        <div class="flex items-baseline gap-1">
+          <span data-count="6" data-count-from="1" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">6</span>
+          <span class="text-[28px] font-extrabold leading-none text-white">×</span>
+        </div>
+        <div class="flex gap-1 mt-[clamp(9px,1.1svh,12px)]">
+          {Array.from({ length: 6 }).map(() => (
+            <span data-seg class="flex-1 h-1 rounded-full bg-[#EE8FD2]"></span>
+          ))}
+        </div>
+        <p class="mt-[clamp(9px,1.2svh,12px)] text-[13px] leading-[1.3] font-semibold tracking-[-.2px] text-white [text-wrap:pretty]">ROI promedio en la primera contratación crítica acompañada</p>
+      </div>
+      <div
+        data-extra-card
+        data-extras={JSON.stringify(extras)}
+        class="relative rounded-[18px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]"
+      >
+        <div class="flex items-center justify-between mb-[clamp(6px,1svh,10px)]">
+          <span class="text-[10px] font-bold tracking-[1.6px] uppercase text-white/45">Impacto adicional</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse"></span>
+        </div>
+        <div data-extra-fade class="transition-opacity duration-300">
+          <div class="flex items-baseline gap-0.5">
+            <span data-extra-num class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">-35/50</span>
+            <span data-extra-unit class="text-[22px] font-extrabold leading-none text-white">%</span>
+          </div>
+          <div class="flex gap-1 mt-[clamp(9px,1.1svh,12px)]">
+            {extras.map((_, i) => (
+              <span data-extra-dot class:list={["h-1 rounded-full transition-all", i === 0 ? "w-3.5 bg-white/80" : "w-1 bg-white/25"]}></span>
+            ))}
+          </div>
+          <p class="mt-[clamp(9px,1.2svh,12px)] text-[13px] leading-[1.3] font-semibold tracking-[-.2px] text-white [text-wrap:pretty]">
+            <span data-extra-title>Rotación Crítica</span><span class="text-white/45"> · </span><span data-extra-sub class="text-white/70">verificable · 90 días</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
