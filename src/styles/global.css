@@ -16,6 +16,14 @@ input:focus, select:focus, textarea:focus {
   background: linear-gradient(135deg, #1B4E9F 0%, #7B5CC4 55%, #C84FAE 100%);
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; }
   html { scroll-behavior: auto; }

@@ -13,7 +13,14 @@ const steps = [
       Doce semanas, cuatro entregables
     </h2>
 
-    <div class="overflow-x-auto mt-[clamp(22px,2.6vw,34px)] pb-1.5">
+    <div data-method-controls class="hidden mt-4 items-center justify-between flex-wrap gap-3">
+      <p id="metodologia-ayuda" class="text-[13px] leading-relaxed font-medium text-[#1B4E9F]">Deslizá para ver los 4 pasos</p>
+      <div class="flex gap-2">
+        <button data-method-prev type="button" aria-label="Ver paso anterior" aria-controls="metodologia-pasos" class="grid place-items-center w-11 h-11 rounded-full bg-[#E8EFFA] text-[#1B4E9F] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><span aria-hidden="true">←</span></button>
+        <button data-method-next type="button" aria-label="Ver paso siguiente" aria-controls="metodologia-pasos" class="grid place-items-center w-11 h-11 rounded-full bg-[#E8EFFA] text-[#1B4E9F] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+    <div id="metodologia-pasos" data-method-track role="region" aria-label="Los cuatro pasos de nuestra metodología" tabindex="0" class="overflow-x-auto mt-[clamp(22px,2.6vw,34px)] pb-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1B4E9F] focus-visible:outline-offset-2">
       <div class="relative flex gap-4" style="min-width:max-content">
         <div class="absolute left-[130px] right-[130px] top-[21px] h-[3px] rounded-full bg-[#C0CBE0] z-0"></div>
         {steps.map((s, i) => (

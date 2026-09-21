@@ -12,6 +12,34 @@ function initHeader() {
   onScroll();
 }
 
+function initMenu() {
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const menu = document.querySelector('[data-mobile-menu]');
+  if (!toggle || !menu) return;
+  const iconOpen = toggle.querySelector('[data-icon-open]');
+  const iconClose = toggle.querySelector('[data-icon-close]');
+  let open = false;
+
+  const setState = (isOpen) => {
+    open = isOpen;
+    menu.classList.toggle('hidden', !open);
+    menu.classList.toggle('flex', open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  };
+
+  toggle.addEventListener('click', () => setState(!open));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setState(false)));
+  addEventListener('resize', () => {
+    if (innerWidth >= 1024 && open) setState(false);
+  });
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && open) setState(false);
+  });
+}
+
 function initHeroVideo() {
   const v = document.querySelector('[data-hero-video]');
   if (!v) return;
@@ -74,10 +102,139 @@ function initHeroMetrics() {
   }, DELAY);
 }
 
+function initMobileMetrics() {
+  const root = document.querySelector('[data-mobile-metrics]');
+  if (!root) return;
+  const slides = Array.from(root.querySelectorAll('[data-mobile-slide]'));
+  const viewport = root.querySelector('[data-mobile-viewport]');
+  const controls = root.querySelector('[data-mobile-controls]');
+  const prev = root.querySelector('[data-mobile-prev]');
+  const next = root.querySelector('[data-mobile-next]');
+  if (slides.length < 2 || !viewport || !controls || !prev || !next) return;
+  const desktop = matchMedia('(min-width: 640px)');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let index = 0;
+  let paused = reduced.matches;
+  let visible = true;
+  let hovered = false;
+  let timer;
+  let touchStart;
+
+  const render = () => {
+    slides.forEach((slide, i) => {
+      slide.dataset.active = String(i === index);
+      slide.setAttribute('aria-hidden', String(i !== index));
+    });
+  };
+  const sync = () => {
+    clearInterval(timer);
+    const playing = !desktop.matches && !reduced.matches && !paused && visible && !hovered && !document.hidden;
+    viewport.setAttribute('aria-live', playing ? 'off' : 'polite');
+    if (playing) timer = setInterval(() => {
+      index = (index + 1) % slides.length;
+      render();
+    }, 5000);
+  };
+  const move = (direction) => {
+    paused = true;
+    sync();
+    index = (index + direction + slides.length) % slides.length;
+    render();
+  };
+  prev.addEventListener('click', () => move(-1));
+  next.addEventListener('click', () => move(1));
+  root.addEventListener('focusin', () => {
+    paused = true;
+    sync();
+  });
+  root.addEventListener('pointerenter', (event) => {
+    if (event.pointerType === 'mouse') { hovered = true; sync(); }
+  });
+  root.addEventListener('pointerleave', () => { hovered = false; sync(); });
+  viewport.addEventListener('pointerdown', (event) => {
+    touchStart = { x: event.clientX, y: event.clientY };
+  });
+  viewport.addEventListener('pointerup', (event) => {
+    if (!touchStart) return;
+    const dx = event.clientX - touchStart.x;
+    const dy = event.clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
+  });
+  viewport.addEventListener('pointercancel', () => { touchStart = null; });
+  desktop.addEventListener('change', sync);
+  reduced.addEventListener('change', () => { paused = reduced.matches || paused; sync(); });
+  document.addEventListener('visibilitychange', sync);
+  if (typeof IntersectionObserver !== 'undefined') {
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: 0.1 }).observe(root);
+  }
+  controls.classList.remove('hidden');
+  render();
+  sync();
+}
+
+function initStatsCarousel() {
+  const track = document.querySelector('[data-stats-carousel]');
+  const prev = document.querySelector('[data-stats-prev]');
+  const next = document.querySelector('[data-stats-next]');
+  if (!track || !prev || !next) return;
+
+  const step = () => {
+    const card = track.firstElementChild;
+    return card ? card.getBoundingClientRect().width + 12 : track.clientWidth * 0.8;
+  };
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+  const update = () => {
+    const scrollable = track.scrollWidth > track.clientWidth + 8;
+    prev.classList.toggle('hidden', !scrollable);
+    next.classList.toggle('hidden', !scrollable);
+    prev.classList.toggle('opacity-40', track.scrollLeft <= 4);
+    next.classList.toggle('opacity-40', track.scrollLeft >= track.scrollWidth - track.clientWidth - 4);
+  };
+  track.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+}
+
+function initMethodology() {
+  const track = document.querySelector('[data-method-track]');
+  const controls = document.querySelector('[data-method-controls]');
+  const prev = document.querySelector('[data-method-prev]');
+  const next = document.querySelector('[data-method-next]');
+  if (!track || !controls || !prev || !next) return;
+
+  const update = () => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const scrollable = maxScroll > 1;
+    controls.classList.toggle('hidden', !scrollable);
+    controls.classList.toggle('flex', scrollable);
+    if (scrollable) track.setAttribute('aria-describedby', 'metodologia-ayuda');
+    else track.removeAttribute('aria-describedby');
+    prev.disabled = track.scrollLeft <= 1;
+    next.disabled = track.scrollLeft >= maxScroll - 1;
+  };
+  const move = (direction) => {
+    const rail = track.firstElementChild;
+    const step = rail.querySelector('[data-reveal]');
+    if (!step) return;
+    track.scrollBy({
+      left: direction * (step.getBoundingClientRect().width + (parseFloat(getComputedStyle(rail).columnGap) || 0)),
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    });
+  };
+  prev.addEventListener('click', () => move(-1));
+  next.addEventListener('click', () => move(1));
+  track.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(update).observe(track);
+  update();
+}
+
 function initReveal() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
-  if (!nodes.length || typeof IntersectionObserver === 'undefined') {
+  if (!nodes.length || matchMedia('(prefers-reduced-motion: reduce)').matches || typeof IntersectionObserver === 'undefined') {
     nodes.forEach((el) => el.classList.add('is-visible'));
     return;
   }
@@ -319,6 +476,31 @@ function initContactForm() {
   const resetBtn = document.querySelector('[data-contact-reset]');
   if (!form || !success) return;
 
+  const section = form.closest('#contacto');
+  const extraToggle = form.querySelector('[data-contact-extra-toggle]');
+  const detailsToggle = section?.querySelector('[data-contact-details-toggle]');
+  const mobile = matchMedia('(max-width: 639px)');
+  const setExtraOpen = (open) => {
+    form.dataset.extraOpen = String(open);
+    extraToggle?.setAttribute('aria-expanded', String(open));
+    if (extraToggle) extraToggle.textContent = open ? 'Ocultar datos adicionales' : 'Agregar datos de mi empresa (opcional)';
+  };
+  extraToggle?.addEventListener('click', () => setExtraOpen(form.dataset.extraOpen !== 'true'));
+  detailsToggle?.addEventListener('click', () => {
+    const open = section.dataset.detailsOpen !== 'true';
+    section.dataset.detailsOpen = String(open);
+    detailsToggle.setAttribute('aria-expanded', String(open));
+  });
+  const syncRequired = () => {
+    ['empresa', 'empleados'].forEach((name) => {
+      const field = form.elements.namedItem(name);
+      if (field) field.required = !mobile.matches;
+    });
+  };
+  mobile.addEventListener('change', syncRequired);
+  syncRequired();
+  form.addEventListener('reset', () => setExtraOpen(false));
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     form.classList.add('hidden');
@@ -336,8 +518,12 @@ function initContactForm() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
+  initMenu();
   initHeroVideo();
   initHeroMetrics();
+  initMobileMetrics();
+  initStatsCarousel();
+  initMethodology();
   initReveal();
   initExtraCard();
   initWhatsApp();

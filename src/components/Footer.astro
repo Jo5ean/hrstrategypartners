@@ -1,21 +1,21 @@
 ---
 ---
-<footer class="bg-[#E8EFFA] px-4 sm:px-8 lg:px-16 py-[16px]">
-  <div class="max-w-[1200px] mx-auto flex flex-wrap items-center justify-between gap-x-8 gap-y-2.5">
-    <div class="flex items-center gap-2.5">
+<footer class="site-footer bg-[#E8EFFA] px-4 sm:px-8 lg:px-16 py-[16px]">
+  <div class="footer-layout max-w-[1200px] mx-auto flex flex-wrap items-center justify-between gap-x-8 gap-y-2.5">
+    <div class="footer-brand flex items-center gap-2.5">
       <a
         href="#inicio"
         aria-label="Volver arriba"
-        class="grid place-items-center w-9 h-9 rounded-full bg-[#0C1630] text-white text-sm leading-none shadow-[0_6px_18px_rgba(12,22,48,.2)] hover:bg-[#1B4E9F] hover:-translate-y-px transition mr-1"
+        class="footer-top grid place-items-center w-9 h-9 rounded-full bg-[#0C1630] text-white text-sm leading-none shadow-[0_6px_18px_rgba(12,22,48,.2)] hover:bg-[#1B4E9F] hover:-translate-y-px transition mr-1"
         >↑</a
       >
       <span class="brand-sym grid place-items-center w-[30px] h-[30px] rounded-full text-white text-[10px] font-extrabold">HR</span>
-      <span class="flex flex-col leading-none">
+      <span class="footer-wordmark flex flex-col leading-none">
         <span class="text-[13px] font-extrabold tracking-[1.5px] uppercase text-[#0C1630]">HR Strategy Partners</span>
         <span class="mt-[2px] text-[8px] font-medium tracking-[2px] uppercase text-[#6B7A99]">Alianzas Estratégicas</span>
       </span>
     </div>
-    <div class="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[13.5px] leading-[1.4] text-[#4A5568]">
+    <div class="footer-contacts flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[13.5px] leading-[1.4] text-[#4A5568]">
       <a href="mailto:contacto@hrstrategypartners.com.ar" class="hover:text-[#0C1630]">contacto@hrstrategypartners.com.ar</a>
       <a href="tel:+5493872289285" class="font-medium hover:text-[#0C1630]">+54 387 228 9285</a>
       <span class="text-[#6B7A99]">Salta · NOA · Argentina</span>
@@ -23,3 +23,63 @@
     </div>
   </div>
 </footer>
+
+<style>
+  @media (width < 640px) {
+    .site-footer {
+      position: relative;
+      padding-top: 24px;
+      padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .footer-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      justify-content: stretch;
+      width: 100%;
+      gap: 14px;
+    }
+
+    .footer-brand {
+      justify-content: center;
+    }
+
+    .footer-brand .brand-sym {
+      flex-shrink: 0;
+    }
+
+    .footer-wordmark {
+      min-width: 0;
+      line-height: 1.3;
+    }
+
+    .footer-wordmark > span:first-child {
+      font-size: 12px;
+      letter-spacing: .8px;
+    }
+
+    .footer-top {
+      position: absolute;
+      left: 20px;
+      bottom: 24px;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+    }
+
+    .footer-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 12px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .footer-contacts a {
+      flex-basis: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+  }
+</style>
