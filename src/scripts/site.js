@@ -46,9 +46,32 @@ function initHeroVideo() {
   v.muted = true;
   v.defaultMuted = true;
   v.volume = 0;
+  v.autoplay = true;
+  v.playsInline = true;
   v.setAttribute('muted', '');
-  const tryPlay = () => v.play().catch(() => {});
-  if (v.paused) tryPlay();
+  v.setAttribute('playsinline', '');
+  let pending = false;
+  const tryPlay = async () => {
+    if (!v.paused || document.hidden || pending) return;
+    pending = true;
+    v.muted = true;
+    try {
+      await v.play();
+      v.dataset.playback = 'playing';
+    } catch (error) {
+      v.dataset.playback = error.name === 'NotAllowedError' ? 'blocked' : 'waiting';
+    } finally {
+      pending = false;
+    }
+  };
+  v.addEventListener('loadeddata', tryPlay);
+  v.addEventListener('canplay', tryPlay);
+  addEventListener('pageshow', tryPlay);
+  document.addEventListener('visibilitychange', tryPlay);
+  ['pointerdown', 'touchend', 'keydown'].forEach((event) => {
+    document.addEventListener(event, tryPlay, { capture: true, passive: true });
+  });
+  tryPlay();
 }
 
 function initHeroMetrics() {
@@ -119,6 +142,8 @@ function initMobileMetrics() {
   let hovered = false;
   let timer;
   let touchStart;
+  let transitioning = false;
+  let animation;
 
   const render = () => {
     slides.forEach((slide, i) => {
@@ -126,20 +151,49 @@ function initMobileMetrics() {
       slide.setAttribute('aria-hidden', String(i !== index));
     });
   };
+  const animateSlide = async (slide, frames) => {
+    animation = slide.animate(frames, { duration: 240, easing: 'ease-in-out', fill: 'forwards' });
+    await animation.finished.catch(() => {});
+    animation.cancel();
+    animation = null;
+  };
+  const change = async (direction) => {
+    if (transitioning) return;
+    const nextIndex = (index + direction + slides.length) % slides.length;
+    if (reduced.matches || desktop.matches || !slides[index].animate) {
+      index = nextIndex;
+      render();
+      return;
+    }
+    transitioning = true;
+    try {
+      await animateSlide(slides[index], [
+        { opacity: 1, transform: 'translateX(0)' },
+        { opacity: 0, transform: `translateX(${-direction * 16}px)` }
+      ]);
+      index = nextIndex;
+      render();
+      if (!reduced.matches && !desktop.matches && visible && !document.hidden) {
+        await animateSlide(slides[index], [
+          { opacity: 0, transform: `translateX(${direction * 16}px)` },
+          { opacity: 1, transform: 'translateX(0)' }
+        ]);
+      }
+    } finally {
+      transitioning = false;
+    }
+  };
   const sync = () => {
     clearInterval(timer);
+    if (desktop.matches || reduced.matches || !visible || document.hidden) animation?.finish();
     const playing = !desktop.matches && !reduced.matches && !paused && visible && !hovered && !document.hidden;
     viewport.setAttribute('aria-live', playing ? 'off' : 'polite');
-    if (playing) timer = setInterval(() => {
-      index = (index + 1) % slides.length;
-      render();
-    }, 5000);
+    if (playing) timer = setInterval(() => change(1), 5000);
   };
   const move = (direction) => {
     paused = true;
     sync();
-    index = (index + direction + slides.length) % slides.length;
-    render();
+    change(direction);
   };
   prev.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));

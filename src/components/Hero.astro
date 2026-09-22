@@ -22,6 +22,7 @@ const mobileMetrics = [
     muted
     loop
     playsinline
+    preload="auto"
     src="/videos/hr-hero.mp4"
     class="absolute inset-0 w-full h-full object-cover z-[1]"
   ></video>
@@ -45,7 +46,7 @@ const mobileMetrics = [
   </div>
 
   <div data-mobile-metrics role="region" aria-roledescription="carrusel" aria-label="Resultados de nuestros programas" class="relative z-10 sm:hidden flex-none w-full max-w-[400px] mx-auto mt-6">
-    <div data-mobile-viewport id="hero-mobile-metrics" aria-live="off" class="grid rounded-[20px] bg-[#0C1630]/60 border border-white/15 backdrop-blur-md px-4 py-4 touch-pan-y">
+    <div data-mobile-viewport id="hero-mobile-metrics" aria-live="off" class="grid overflow-hidden rounded-[20px] bg-[#0C1630]/60 border border-white/15 backdrop-blur-md px-4 py-4 touch-pan-y">
       {mobileMetrics.map((metric, i) => (
         <div data-mobile-slide data-active={String(i === 0)} aria-hidden={i !== 0} role="group" aria-roledescription="diapositiva" aria-label={`${i + 1} de ${mobileMetrics.length}`} class="mobile-metric-slide">
           <p class="whitespace-nowrap font-extrabold tracking-[-1px] leading-none" style={{ color: metric.accent }}>
@@ -155,7 +156,6 @@ const mobileMetrics = [
     gap: 12px;
     visibility: hidden;
     opacity: 0;
-    transition: opacity .35s ease;
   }
 
   .mobile-metric-slide[data-active='true'] {
