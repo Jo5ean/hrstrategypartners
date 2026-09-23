@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hrstrategypartners.com.ar/sitemap-index.xml

@@ -27,7 +27,12 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hrstrategypartners.com.ar/" />
     <meta property="og:locale" content="es_AR" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://hrstrategypartners.com.ar/og-image.jpg" />
+    <meta property="og:image:width" content="1599" />
+    <meta property="og:image:height" content="1600" />
+    <meta property="og:image:alt" content="HR Strategy Partners" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://hrstrategypartners.com.ar/og-image.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -36,6 +41,11 @@ const {
     />
   </head>
   <body class="font-sans text-[#0C1630] bg-[#F8F7FC] overflow-x-hidden">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-5 focus:py-3 focus:rounded-full focus:bg-[#0C1630] focus:text-white focus:text-[14px] focus:font-bold"
+      >Saltar al contenido</a
+    >
     <slot />
     <script src="../scripts/site.js"></script>
   </body>

@@ -376,7 +376,7 @@ const TIERS = [
 ];
 
 function matchTier(text) {
-  const t = text.toLowerCase();
+  const t = text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   let best = null;
   let bestScore = 0;
   TIERS.forEach((tier) => {

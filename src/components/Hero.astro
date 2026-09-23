@@ -18,6 +18,7 @@ const mobileMetrics = [
 >
   <video
     data-hero-video
+    aria-hidden="true"
     autoplay
     muted
     loop
@@ -26,7 +27,7 @@ const mobileMetrics = [
     src="/videos/hr-hero.mp4"
     class="absolute inset-0 w-full h-full object-cover z-[1]"
   ></video>
-  <div class="absolute inset-0 z-[2] pointer-events-none bg-[rgba(12,22,48,.65)]"></div>
+  <div class="absolute inset-0 z-[2] pointer-events-none bg-[rgba(12,22,48,.42)]"></div>
   <div class="absolute left-0 right-0 bottom-0 h-[62%] z-[3] pointer-events-none bg-[linear-gradient(to_top,rgba(12,22,48,.92)_6%,rgba(12,22,48,0))]"></div>
 
   <div class="hero-copy relative z-10 pointer-events-none flex-1 flex flex-col justify-center w-full max-w-[1200px] mx-auto animate-fadeUp">
@@ -46,7 +47,7 @@ const mobileMetrics = [
   </div>
 
   <div data-mobile-metrics role="region" aria-roledescription="carrusel" aria-label="Resultados de nuestros programas" class="relative z-10 sm:hidden flex-none w-full max-w-[400px] mx-auto mt-6">
-    <div data-mobile-viewport id="hero-mobile-metrics" aria-live="off" class="grid overflow-hidden rounded-[20px] bg-[#0C1630]/60 border border-white/15 backdrop-blur-md px-4 py-4 touch-pan-y">
+    <div data-mobile-viewport id="hero-mobile-metrics" aria-live="off" class="grid overflow-hidden rounded-[14px] bg-[#0C1630]/60 border border-white/15 backdrop-blur-md px-4 py-4 touch-pan-y">
       {mobileMetrics.map((metric, i) => (
         <div data-mobile-slide data-active={String(i === 0)} aria-hidden={i !== 0} role="group" aria-roledescription="diapositiva" aria-label={`${i + 1} de ${mobileMetrics.length}`} class="mobile-metric-slide">
           <p class="whitespace-nowrap font-extrabold tracking-[-1px] leading-none" style={{ color: metric.accent }}>
@@ -87,7 +88,7 @@ const mobileMetrics = [
     </button>
     <div data-stats-carousel class="flex gap-[clamp(12px,1.4vw,18px)] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-1">
       <div class="w-full flex-none snap-center sm:w-auto sm:flex-1">
-        <div class="w-[70%] sm:w-full mx-auto relative rounded-[18px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        <div class="w-[70%] sm:w-full mx-auto relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
         <div class="flex items-baseline gap-0.5">
           <span data-count="-45" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">-45</span>
           <span class="text-[22px] font-extrabold leading-none text-white">%</span>
@@ -99,7 +100,7 @@ const mobileMetrics = [
         </div>
       </div>
       <div class="w-full flex-none snap-center sm:w-auto sm:flex-1">
-        <div class="w-[70%] sm:w-full mx-auto relative rounded-[18px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        <div class="w-[70%] sm:w-full mx-auto relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
         <div class="flex items-baseline gap-0.5">
           <span data-count="28" data-count-prefix="+" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">+28</span>
           <span class="text-[22px] font-extrabold leading-none text-white">%</span>
@@ -111,7 +112,7 @@ const mobileMetrics = [
         </div>
       </div>
       <div class="w-full flex-none snap-center sm:w-auto sm:flex-1">
-        <div class="w-[70%] sm:w-full mx-auto relative rounded-[18px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        <div class="w-[70%] sm:w-full mx-auto relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
         <div class="flex items-baseline gap-1">
           <span data-count="6" data-count-from="1" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">6</span>
           <span class="text-[28px] font-extrabold leading-none text-white">×</span>

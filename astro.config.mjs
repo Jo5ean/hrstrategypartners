@@ -1,7 +1,11 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://hrstrategypartners.com.ar',
-  integrations: [tailwind()]
+  integrations: [sitemap()],
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });

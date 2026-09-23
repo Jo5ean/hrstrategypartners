@@ -18,7 +18,7 @@ const items = [
   },
   {
     tag: '90 días',
-    accent: '#6A4AB8',
+    accent: '#7859C1',
     tagBg: '#EFECFB',
     title: 'Estructura Express',
     desc: 'Del caos al sistema en 90 días.',
@@ -27,7 +27,7 @@ const items = [
   },
   {
     tag: 'Garantía 90 días',
-    accent: '#B03E97',
+    accent: '#B33A99',
     tagBg: '#FBEAF6',
     title: 'Atracción de Talento Crítico',
     desc: 'Búsqueda ejecutiva Topgrading. No llenamos vacantes: construimos equipos.',
@@ -36,7 +36,7 @@ const items = [
   },
   {
     tag: '+20% productividad',
-    accent: '#0F3D80',
+    accent: '#197486',
     tagBg: '#E4EBF7',
     title: 'Desarrollo de Liderazgo',
     desc: 'Líderes que multiplican, con entregables medibles.',
@@ -65,7 +65,7 @@ const items = [
         <div
           data-reveal
           class:list={[
-            "relative grid gap-[clamp(18px,2.4vw,32px)] p-[clamp(22px,2.4vw,32px)] rounded-[30px] transition-[box-shadow,transform] duration-300",
+            "relative grid gap-[clamp(18px,2.4vw,32px)] p-[clamp(22px,2.4vw,32px)] rounded-[22px] transition-[box-shadow,transform] duration-300",
             item.flagship
               ? "bg-[#0C1630] shadow-[0_18px_60px_rgba(12,22,48,.3)] hover:shadow-[0_26px_70px_rgba(12,22,48,.4)] hover:-translate-y-[3px]"
               : item.outlined
@@ -108,10 +108,10 @@ const items = [
             </p>
           </div>
           <div
-            class="rounded-[22px] p-[clamp(16px,1.8vw,22px)]"
+            class="rounded-[14px] p-[clamp(16px,1.8vw,22px)]"
             style={{ background: item.flagship ? 'rgba(255,255,255,.07)' : '#F8F7FC' }}
           >
-            <p class="mb-3.5 text-[13px] font-bold tracking-[.4px]" style={{ color: item.flagship ? 'rgba(255,255,255,.6)' : '#6B7A99' }}>INCLUYE</p>
+            <p class="mb-3.5 text-[13px] font-bold tracking-[.4px]" style={{ color: item.flagship ? 'rgba(255,255,255,.6)' : '#5C6B8A' }}>INCLUYE</p>
             <ul class="flex flex-col">
               {item.includes.map((line) => (
                 <li
@@ -130,7 +130,7 @@ const items = [
       ))}
     </div>
 
-    <p class="mt-[26px] text-[15px] leading-[1.7] text-[#6B7A99]">Propuestas de inversión personalizadas según el tamaño y contexto de cada organización.</p>
+    <p class="mt-[26px] text-[15px] leading-[1.7] text-[#5C6B8A]">Propuestas de inversión personalizadas según el tamaño y contexto de cada organización.</p>
 
     <PlanFinder />
   </div>
