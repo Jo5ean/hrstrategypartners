@@ -1,7 +1,7 @@
 ---
 const links = [
   { href: '#costo', label: 'El costo' },
-  { href: '#niveles', label: 'Niveles' },
+  { href: '#niveles', label: 'Programas' },
   { href: '#como-trabajamos', label: 'Cómo trabajamos' },
   { href: '#por-que', label: 'Por qué HRSP' },
   { href: '#quien-dirige', label: 'Quién dirige' }
@@ -9,7 +9,7 @@ const links = [
 ---
 <header
   data-header
-  class="fixed top-0 inset-x-0 z-[60] px-4 sm:px-8 lg:px-16 py-[15px] transition-[background-color,box-shadow] duration-300 bg-[rgba(58,58,65,.45)] backdrop-blur-xl backdrop-saturate-150"
+  class="fixed top-0 inset-x-0 z-[60] px-4 sm:px-8 lg:px-16 py-[15px] transition-[background-color,box-shadow] duration-300 bg-[rgba(15,46,107,.45)] backdrop-blur-xl backdrop-saturate-150"
 >
   <div class="w-full max-w-[1200px] mx-auto flex items-center justify-between gap-2 sm:gap-6">
     <a href="#inicio" class="flex items-center gap-3 text-white flex-none hover:opacity-80 transition">
@@ -23,9 +23,11 @@ const links = [
       ))}
       <a
         href="#contacto"
-        class="ml-1.5 px-[18px] py-3 rounded-full bg-brand-blue text-white font-bold text-[13px] whitespace-nowrap shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] hover:-translate-y-px transition"
-        >Diagnóstico de 30 minutos</a
+        class="nav-cta ml-1.5 px-[18px] py-3 rounded-full bg-brand-blue text-white font-bold text-[13px] whitespace-nowrap shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] transition"
       >
+        <svg class="nav-cta-border" aria-hidden="true" focusable="false"><rect x="1.5" y="1.5" pathLength="100" /></svg>
+        Diagnóstico de 30 minutos
+      </a>
     </nav>
     <button
       data-menu-toggle
@@ -42,7 +44,7 @@ const links = [
   <nav
     data-mobile-menu
     id="menu-movil"
-    class="hidden max-h-[calc(100svh-100px)] overflow-y-auto lg:!hidden mt-3 mx-auto w-full max-w-[1200px] rounded-[14px] bg-[rgba(58,58,65,.97)] backdrop-blur-xl border border-white/10 p-3 flex-col gap-1"
+    class="hidden max-h-[calc(100svh-100px)] overflow-y-auto lg:!hidden mt-3 mx-auto w-full max-w-[1200px] rounded-[14px] bg-[rgba(15,46,107,.97)] backdrop-blur-xl border border-white/10 p-3 flex-col gap-1"
     aria-label="Menú móvil"
   >
     {links.map((link) => (
@@ -50,8 +52,64 @@ const links = [
     ))}
     <a
       href="#contacto"
-      class="mt-1.5 block text-center px-4 py-3.5 rounded-xl bg-brand-blue text-white font-bold text-[15px] shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] transition"
-      >Diagnóstico de 30 minutos</a
+      class="nav-cta nav-cta-mobile mt-1.5 block text-center px-4 py-3.5 rounded-xl bg-brand-blue text-white font-bold text-[15px] shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] transition"
     >
+      <svg class="nav-cta-border" aria-hidden="true" focusable="false"><rect x="1.5" y="1.5" pathLength="100" /></svg>
+      Diagnóstico de 30 minutos
+    </a>
   </nav>
 </header>
+
+<style>
+  .nav-cta {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .nav-cta:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+
+  .nav-cta-border {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .nav-cta-border rect {
+    width: calc(100% - 3px);
+    height: calc(100% - 3px);
+    rx: auto;
+    ry: calc(50% - 1.5px);
+    fill: none;
+    stroke: var(--color-brand-magenta);
+    stroke-width: 2.5px;
+    stroke-linecap: round;
+    stroke-dasharray: 20 80;
+    animation: cta-border-orbit 5.5s cubic-bezier(.45, 0, .55, 1) infinite;
+  }
+
+  .nav-cta-mobile .nav-cta-border rect {
+    rx: 10.5px;
+    ry: 10.5px;
+  }
+
+  @keyframes cta-border-orbit {
+    0% { stroke-dashoffset: 0; stroke: var(--color-brand-violet); }
+    30% { stroke-dashoffset: -16; stroke: var(--color-brand-magenta); }
+    60% { stroke-dashoffset: -64; stroke: #F06FCB; }
+    85% { stroke-dashoffset: -86; stroke: var(--color-brand-magenta); }
+    100% { stroke-dashoffset: -100; stroke: var(--color-brand-violet); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-cta-border rect {
+      animation: none;
+      stroke-dasharray: none;
+    }
+  }
+</style>

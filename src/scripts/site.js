@@ -1,8 +1,8 @@
 function initHeader() {
   const header = document.querySelector('[data-header]');
   if (!header) return;
-  const BASE_BG = 'bg-[rgba(58,58,65,.45)]';
-  const SCROLLED_CLASSES = ['bg-[rgba(58,58,65,.96)]', 'shadow-[0_8px_34px_rgba(12,22,48,.26)]'];
+  const BASE_BG = 'bg-[rgba(15,46,107,.45)]';
+  const SCROLLED_CLASSES = ['bg-[rgba(15,46,107,.94)]', 'shadow-[0_8px_34px_rgba(12,22,48,.26)]'];
   const onScroll = () => {
     const scrolled = (window.scrollY || document.documentElement.scrollTop) > 80;
     header.classList.toggle(BASE_BG, !scrolled);

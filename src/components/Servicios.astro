@@ -1,147 +1,92 @@
 ---
-import PlanFinder from './PlanFinder.astro';
+import OndasFondo from './OndasFondo.astro';
 
-const semanas = [
-  { rango: 'Semanas 1–2', texto: 'Mapa de Riesgos y Gap Analysis con impacto económico.' },
-  { rango: 'Semanas 3–4', texto: 'Diccionario de Puestos (quién responde por qué) y SOPs operacionales.' },
-  { rango: 'Semanas 5–8', texto: 'Manual de Bienvenida y Smart Onboarding automatizado con IA.' },
-  { rango: 'Semanas 9–11', texto: 'Dashboard de KPIs ISO 30414 en tiempo real.' },
-  { rango: 'Semana 12', texto: 'Informe Final de Impacto Económico con ROI verificable y auditable.' }
+const programas = [
+  {
+    nivel: 'Diagnóstico',
+    nombre: 'Auditoría de Salud Organizacional',
+    plazo: 'Claridad para decidir en 15 días.',
+    para: 'Sabés que algo no funciona, pero no dónde empezar.',
+    recibis: 'Un diagnóstico con riesgos, costos y prioridades. Una hoja de ruta de 90 días para saber qué resolver primero.',
+    detalles: [
+      ['Tu participación', '3 a 4 entrevistas con personas clave y datos de rotación y costos.'],
+      ['Alcance', 'Diagnóstico y presentación de resultados. No incluye implementación.'],
+      ['Continuidad', 'Si avanzás a otro programa dentro de los 90 días, reconocemos lo que pagaste por la auditoría.']
+    ],
+    color: '#1B4E9F',
+    oscuro: false
+  },
+  {
+    nivel: 'Transformación',
+    nombre: 'Programa Estructura Express',
+    plazo: 'Del desorden a un equipo organizado en 12 semanas.',
+    para: 'Necesitás resolver el problema y dejar de apagar incendios.',
+    recibis: 'Roles claros, procesos de trabajo, un sistema de incorporación y un tablero de indicadores. Lo implementamos con tu equipo.',
+    detalles: [
+      ['El recorrido', 'Diagnóstico, definición de puestos, procesos e incorporación de personas. Cerramos con un informe de impacto económico.'],
+      ['Tu participación', '4 horas semanales y una reunión quincenal con dirección.'],
+      ['Cómo pagás', 'En tres hitos, contra entregables aceptados.']
+    ],
+    color: '#7B5CC4',
+    oscuro: false
+  },
+  {
+    nivel: 'Acompañamiento continuo',
+    nombre: 'Fractional CPO',
+    plazo: 'Dirección de personas a tiempo parcial.',
+    para: 'Querés sostener lo logrado mientras tu empresa sigue creciendo.',
+    recibis: 'Acompañamiento para contratar, desarrollar líderes y retener personas clave. Seguimiento mensual, sin sumar una posición de tiempo completo.',
+    detalles: [
+      ['Seguimiento', 'Tablero de indicadores y una reunión ejecutiva mensual de 90 minutos.'],
+      ['Disponibilidad', 'Respuesta en 24 horas hábiles; urgencias críticas, en 4 horas hábiles.'],
+      ['Continuidad', 'Salida con aviso de 30 días y transferencia de documentación y accesos.']
+    ],
+    color: '#FFFFFF',
+    oscuro: true
+  }
 ];
 ---
 <section id="niveles" class="bg-[#F8F7FC] px-4 sm:px-8 lg:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
   <div class="max-w-[1200px] mx-auto">
-    <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Niveles</p>
-    <h2 class="m-0 max-w-[20ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-1.8px] leading-[1.04] text-ink">Tres niveles. Un sistema.</h2>
-    <p class="mt-3.5 max-w-[62ch] text-[15.5px] leading-[1.7] text-[#4A5568]">No elegís un servicio: elegís hasta dónde necesitás transformar tu organización. El camino más común: el diagnóstico pone número al problema, la transformación rediseña la estructura y la pone a operar, y la capacidad permanente la sostiene mientras la empresa crece.</p>
+    <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Programas</p>
+    <h2 class="m-0 max-w-[20ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-1.8px] leading-[1.04] text-ink">El programa que tu empresa necesita hoy.</h2>
+    <p class="mt-3.5 max-w-[62ch] text-[15.5px] leading-[1.7] text-[#4A5568]">Entender qué pasa, resolverlo o sostener el crecimiento. Empezamos donde más lo necesitás.</p>
 
     <div class="mt-[clamp(28px,3.2vw,44px)] grid gap-6">
+      {programas.map((programa) => (
+        <article data-reveal class:list={['relative overflow-hidden rounded-[20px] p-[clamp(22px,2.6vw,36px)]', programa.oscuro ? 'bg-[#0F2E6B] text-white' : 'bg-white border border-ink/[.08] text-ink']}>
+          {programa.oscuro && <OndasFondo />}
+          <div class="relative z-10">
+            <p class="m-0 text-[11px] font-extrabold tracking-[2px] uppercase" style={`color:${programa.color}`}>{programa.nivel}</p>
+            <h3 class="mt-2 m-0 text-[clamp(21px,2vw,26px)] font-extrabold tracking-[-.6px]">{programa.nombre}</h3>
+            <p class:list={['mt-1.5 text-[15px] italic', programa.oscuro ? 'text-white/90' : 'text-[#5C6B8A]']}>{programa.plazo}</p>
 
-      <article data-reveal class="rounded-[20px] bg-white border border-ink/[.08] p-[clamp(22px,2.6vw,36px)]">
-        <p class="m-0 text-[11px] font-extrabold tracking-[2px] uppercase text-brand-blue">Tier 1 · Diagnóstico</p>
-        <h3 class="mt-2 m-0 text-[clamp(21px,2vw,26px)] font-extrabold tracking-[-.6px] text-ink">Auditoría de Salud Organizacional</h3>
-        <p class="mt-1.5 text-[15px] italic text-[#5C6B8A]">Visibilidad ejecutiva completa en 15 días.</p>
+            <dl class="mt-5 grid gap-4 sm:grid-cols-[180px_1fr]">
+              <dt class:list={['text-[13px] font-bold', programa.oscuro ? 'text-white/90' : 'text-[#5C6B8A]']}>Es para vos si</dt>
+              <dd class="m-0 text-[15px] leading-[1.6]">{programa.para}</dd>
+              <dt class:list={['text-[13px] font-bold pt-3 border-t', programa.oscuro ? 'text-white/90 border-white/20' : 'text-[#5C6B8A] border-ink/[.06]']}>Lo que te llevás</dt>
+              <dd class:list={['m-0 pt-3 border-t text-[15px] leading-[1.6]', programa.oscuro ? 'text-white/95 border-white/20' : 'text-[#4A5568] border-ink/[.06]']}>{programa.recibis}</dd>
+            </dl>
 
-        <dl class="mt-5 grid gap-4 sm:grid-cols-[180px_1fr]">
-          <dt class="text-[13px] font-bold text-[#5C6B8A]">Cuándo es para vos</dt>
-          <dd class="m-0 text-[15px] leading-[1.6] text-ink italic">"Sé que algo me cuesta, pero no sé dónde ni cuánto."</dd>
+            <details class="group mt-4">
+              <summary class="cursor-pointer list-none inline-flex items-center gap-1.5 text-[13.5px] font-bold hover:underline [&::-webkit-details-marker]:hidden" style={`color:${programa.color}`}>
+                <span class="group-open:hidden">Ver alcance y condiciones</span>
+                <span class="hidden group-open:inline">Ver menos</span>
+              </summary>
+              <dl class="mt-4 grid gap-4 sm:grid-cols-[180px_1fr]">
+                {programa.detalles.map(([titulo, texto]) => (
+                  <>
+                    <dt class:list={['text-[13px] font-bold', programa.oscuro ? 'text-white/90' : 'text-[#5C6B8A]']}>{titulo}</dt>
+                    <dd class:list={['m-0 text-[15px] leading-[1.6]', programa.oscuro ? 'text-white/95' : 'text-[#4A5568]']}>{texto}</dd>
+                  </>
+                ))}
+              </dl>
+            </details>
 
-          <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 sm:pt-0 border-t sm:border-t-0 border-ink/[.06]">Lo que recibís</dt>
-          <dd class="m-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">Un informe con diagnóstico integral, Mapa de Riesgos de 5 dimensiones y Gap Analysis con impacto financiero en USD, fugas de dinero ocultas, prioridades ordenadas por retorno y Hoja de Ruta de 90 días. Presentación ejecutiva de cierre.</dd>
-
-          <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Lo que ganás</dt>
-          <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">Claridad total sobre dónde tu estructura te consume capacidad, cuánto cuesta y en qué orden atacarlo.</dd>
-        </dl>
-
-        <details class="group mt-4">
-          <summary class="cursor-pointer list-none inline-flex items-center gap-1.5 text-[13.5px] font-bold text-brand-blue hover:underline [&::-webkit-details-marker]:hidden">
-            <span class="group-open:hidden">Ver detalle completo</span>
-            <span class="hidden group-open:inline">Ver menos</span>
-            <svg class="w-3.5 h-3.5 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
-          </summary>
-          <dl class="mt-4 grid gap-4 sm:grid-cols-[180px_1fr]">
-            <dt class="text-[13px] font-bold text-[#5C6B8A]">Garantía</dt>
-            <dd class="m-0 text-[15px] leading-[1.6] text-[#4A5568]">Cada entregable tiene criterios de aceptación definidos antes de iniciar. Si no los cumple, lo reejecutamos sin costo. No pagás por diagnósticos incompletos.</dd>
-
-            <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Continuidad</dt>
-            <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">Si avanzás al Tier 2 o al Tier 3 dentro de los 90 días posteriores a la entrega, lo que pagaste se reconoce.</dd>
-
-            <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Necesitamos de tu equipo</dt>
-            <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">3 a 4 entrevistas de 60 minutos con personas clave y los datos de rotación y costos de los últimos 12 meses.</dd>
-
-            <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Qué no incluye</dt>
-            <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">Implementación, scorecards, SOPs operativos ni acompañamiento posterior.</dd>
-          </dl>
-        </details>
-
-        <a href="#contacto" class="mt-6 inline-flex items-center gap-2 px-7 py-[14px] rounded-full bg-brand-blue text-white text-[13.5px] font-bold hover:bg-[#153E7E] transition">Reservar diagnóstico de 30 minutos</a>
-      </article>
-
-      <article data-reveal class="rounded-[20px] bg-white border border-ink/[.08] p-[clamp(22px,2.6vw,36px)]">
-        <p class="m-0 text-[11px] font-extrabold tracking-[2px] uppercase" style="color:#7B5CC4">Tier 2 · Transformación</p>
-        <h3 class="mt-2 m-0 text-[clamp(21px,2vw,26px)] font-extrabold tracking-[-.6px] text-ink">Programa Estructura Express</h3>
-        <p class="mt-1.5 text-[15px] italic text-[#5C6B8A]">Del caos al sistema en 12 semanas.</p>
-
-        <dl class="mt-5 grid gap-4 sm:grid-cols-[180px_1fr]">
-          <dt class="text-[13px] font-bold text-[#5C6B8A]">Cuándo es para vos</dt>
-          <dd class="m-0 text-[15px] leading-[1.6] text-ink italic">"Sé dónde pierdo capacidad: necesito que se resuelva y funcione, no más análisis."</dd>
-
-          <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Qué hacemos, semana a semana</dt>
-          <dd class="m-0 pt-3 border-t border-ink/[.06]">
-            <ul class="grid gap-2">
-              {semanas.map((s) => (
-                <li class="text-[15px] leading-[1.6] text-[#4A5568]"><strong class="text-ink font-semibold">{s.rango}:</strong> {s.texto}</li>
-              ))}
-            </ul>
-          </dd>
-
-          <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Lo que ganás</dt>
-          <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">Rotación crítica −35/50% documentada · productividad +20% medida con KPIs auditables · 15 horas directivas liberadas por semana · un sistema que tu empresa opera sola.</dd>
-        </dl>
-
-        <details class="group mt-4">
-          <summary class="cursor-pointer list-none inline-flex items-center gap-1.5 text-[13.5px] font-bold hover:underline [&::-webkit-details-marker]:hidden" style="color:#7B5CC4">
-            <span class="group-open:hidden">Ver detalle completo</span>
-            <span class="hidden group-open:inline">Ver menos</span>
-            <svg class="w-3.5 h-3.5 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
-          </summary>
-          <dl class="mt-4 grid gap-4 sm:grid-cols-[180px_1fr]">
-            <dt class="text-[13px] font-bold text-[#5C6B8A]">Cómo se verifica</dt>
-            <dd class="m-0 text-[15px] leading-[1.6] text-[#4A5568]">Línea de base medida en la semana 2 y contrastada con el Informe Final bajo ISO 30414, auditable por un tercero. Reporte semanal, reunión quincenal de 90 minutos con dirección y workspace con estado en tiempo real.</dd>
-
-            <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Cómo pagás</dt>
-            <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">En tres hitos atados a entregables aceptados: pagás cuando verificás que el trabajo avanza.</dd>
-
-            <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Garantía</dt>
-            <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">Criterios de aceptación por entregable definidos antes de iniciar. El entregable que no cumple se reejecuta sin costo.</dd>
-
-            <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">Necesitamos de tu equipo</dt>
-            <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">4 horas semanales y una reunión quincenal. El resto es responsabilidad de HRSP.</dd>
-
-            <dt class="text-[13px] font-bold text-[#5C6B8A] pt-3 border-t border-ink/[.06]">La cuenta</dt>
-            <dd class="m-0 pt-3 border-t border-ink/[.06] text-[15px] leading-[1.6] text-[#4A5568]">Evitar una sola renuncia en mando medio (USD 6.000–15.000) recupera entre el 75% y el total de la inversión.</dd>
-          </dl>
-        </details>
-
-        <a href="#contacto" class="mt-6 inline-flex items-center gap-2 px-7 py-[14px] rounded-full text-white text-[13.5px] font-bold transition" style="background:#7B5CC4">Reservar diagnóstico de 30 minutos</a>
-      </article>
-
-      <article data-reveal class="rounded-[20px] p-[clamp(22px,2.6vw,36px)]" style="background:#3A3A41">
-        <p class="m-0 text-[11px] font-extrabold tracking-[2px] uppercase text-white/85">Tier 3 · Capacidad permanente</p>
-        <h3 class="mt-2 m-0 text-[clamp(21px,2vw,26px)] font-extrabold tracking-[-.6px] text-white">Fractional CPO</h3>
-        <p class="mt-1.5 text-[15px] italic text-white/90">Dirección ejecutiva de la estructura, a tiempo parcial. Sin relación laboral.</p>
-
-        <dl class="mt-5 grid gap-4 sm:grid-cols-[180px_1fr]">
-          <dt class="text-[13px] font-bold text-white/90">Cuándo es para vos</dt>
-          <dd class="m-0 text-[15px] leading-[1.6] text-white italic">"Lo resuelto no puede volver a degradarse mientras la empresa crece."</dd>
-
-          <dt class="text-[13px] font-bold text-white/90 pt-3 border-t border-white/20">Qué incluye</dt>
-          <dd class="m-0 pt-3 border-t border-white/20 text-[15px] leading-[1.6] text-white/95">Decisiones de incorporación y promoción de talento crítico con Topgrading + IA · sistemas de medición del desempeño · programas de retención de talento crítico · tablero ejecutivo mensual ISO 30414 · reunión mensual de revisión ejecutiva de 90 minutos · presencia en reuniones directivas cuando se requiera.</dd>
-
-          <dt class="text-[13px] font-bold text-white/90 pt-3 border-t border-white/20">Lo que ganás</dt>
-          <dd class="m-0 pt-3 border-t border-white/20 text-[15px] leading-[1.6] text-white/95">Una empresa que crece con control y autonomía sin volver a acumular el costo. Activación en 48 horas, sin proceso de selección ni período de inducción.</dd>
-        </dl>
-
-        <details class="group mt-4">
-          <summary class="cursor-pointer list-none inline-flex items-center gap-1.5 text-[13.5px] font-bold text-white hover:underline [&::-webkit-details-marker]:hidden">
-            <span class="group-open:hidden">Ver detalle completo</span>
-            <span class="hidden group-open:inline">Ver menos</span>
-            <svg class="w-3.5 h-3.5 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
-          </summary>
-          <dl class="mt-4 grid gap-4 sm:grid-cols-[180px_1fr]">
-            <dt class="text-[13px] font-bold text-white/90">Disponibilidad</dt>
-            <dd class="m-0 text-[15px] leading-[1.6] text-white/95">Consultas operativas: respuesta en 24 horas hábiles. Urgencias críticas: 4 horas hábiles.</dd>
-
-            <dt class="text-[13px] font-bold text-white/90 pt-3 border-t border-white/20">Salida</dt>
-            <dd class="m-0 pt-3 border-t border-white/20 text-[15px] leading-[1.6] text-white/95">Aviso de 30 días. Transferencia de cierre garantizada: documentación, accesos y protocolo de continuidad. Todo lo que construimos queda en tu organización.</dd>
-          </dl>
-        </details>
-
-        <a href="#contacto" class="mt-6 inline-flex items-center gap-2 px-7 py-[14px] rounded-full bg-white text-ink text-[13.5px] font-bold hover:bg-white/90 transition">Reservar diagnóstico de 30 minutos</a>
-      </article>
-
+            <a href="#contacto" class="mt-6 inline-flex items-center gap-2 px-7 py-[14px] rounded-full text-[13.5px] font-bold transition hover:opacity-90" style={`background:${programa.color};color:${programa.oscuro ? '#0C1630' : '#FFFFFF'}`}>Reservar diagnóstico de 30 minutos</a>
+          </div>
+        </article>
+      ))}
     </div>
-
-    <PlanFinder />
   </div>
 </section>
