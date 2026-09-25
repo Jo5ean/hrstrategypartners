@@ -1,0 +1,31 @@
+---
+const filas = [
+  {
+    diferencia: 'ROI documentado bajo norma ISO 30414',
+    gana: 'Un informe que presentás a directorio e inversores con la autoridad de un estado financiero. Es el estándar de reporting de las 500 empresas más grandes del mundo. Nadie en el mercado regional lo ofrece.'
+  },
+  {
+    diferencia: 'Implementamos',
+    gana: 'La diferencia entre un informe de 80 páginas que nadie ejecuta y un sistema que tu empresa opera sola.'
+  },
+  {
+    diferencia: 'Criterio ya probado',
+    gana: 'PMBOK, ISO 30414 e IA aplicada a la organización. No pagás por aprendizaje: accedés a criterio probado desde el primer día.'
+  }
+];
+---
+<section id="por-que" class="bg-[#F8F7FC] px-4 sm:px-8 lg:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
+  <div class="max-w-[1200px] mx-auto">
+    <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Por qué HR Strategy Partners</p>
+    <h2 class="m-0 max-w-[22ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-1.8px] leading-[1.04] text-ink">Lo que ganás con cada diferencia</h2>
+
+    <div data-reveal class="mt-[clamp(24px,2.8vw,36px)] grid gap-0 border-t border-ink/[.08]">
+      {filas.map((f) => (
+        <div class="grid gap-1.5 sm:grid-cols-[280px_1fr] sm:gap-8 py-6 border-b border-ink/[.08]">
+          <h3 class="m-0 text-[17px] font-bold text-ink">{f.diferencia}</h3>
+          <p class="m-0 max-w-[68ch] text-[15px] leading-[1.65] text-[#4A5568]">{f.gana}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

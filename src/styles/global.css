@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --color-ink: #0C1630;
   --color-brand-blue: #1B4E9F;
   --color-brand-blue-d: #0F2E6B;
   --color-brand-blue-l: #3468C0;
@@ -9,6 +10,7 @@
   --color-brand-magenta: #C84FAE;
   --color-brand-teal: #2B8698;
   --color-brand-teal-l: #41A8BC;
+  --shadow-card: 0 1px 3px rgba(12,22,48,.06), 0 12px 40px rgba(12,22,48,.06);
   --animate-fadeUp: fadeUp .8s cubic-bezier(0,0,.2,1) both;
   --animate-fadeUpFast: fadeUp .4s ease both;
 }

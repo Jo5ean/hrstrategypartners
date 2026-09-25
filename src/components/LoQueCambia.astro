@@ -1,0 +1,77 @@
+---
+const filas = [
+  {
+    antes: 'Intuís el problema pero no podés cuantificarlo ni presentarlo a tu directorio.',
+    despues: 'Mapa de Riesgos con impacto financiero: sabés exactamente cuánto te cuesta cada disfunción.',
+    cuando: 'Semana 2'
+  },
+  {
+    antes: 'Cada renuncia de un mando medio te cuesta entre USD 6.000 y 15.000.',
+    despues: 'Sistema de retención activo. Reducción documentada de rotación crítica: −35/50%.',
+    cuando: 'Mes 3 y mes 6'
+  },
+  {
+    antes: 'Vos y tu equipo directivo dedican 15–20 horas semanales a apagar incendios.',
+    despues: '15 horas directivas liberadas por semana para decisiones de negocio de alto valor.',
+    cuando: 'Mes 2'
+  },
+  {
+    antes: 'No hay métricas, o viven en planillas sin estándar.',
+    despues: 'Tablero de KPIs bajo norma ISO 30414, presentable a directorio e inversores.',
+    cuando: 'Semana 11'
+  },
+  {
+    antes: 'La inversión en el equipo se percibe como un costo que no se puede defender.',
+    despues: 'Informe Final de Impacto Económico con ROI verificable y auditable. Una sola renuncia evitada recupera entre el 75% y el total de tu inversión.',
+    cuando: 'Semana 12'
+  }
+];
+const diaADia = [
+  'Recuperás casi dos jornadas laborales por semana para lo que hace crecer a tu empresa.',
+  'Ves el riesgo antes de que se vaya la persona, no después.',
+  'Llegás al directorio con números, no con explicaciones.',
+  'Tu empresa deja de depender de héroes: crece sin que todo pase por vos.'
+];
+---
+<section id="cambia" class="bg-white px-4 sm:px-8 lg:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
+  <div class="max-w-[1200px] mx-auto">
+    <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Resultados</p>
+    <h2 class="m-0 max-w-[24ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-1.8px] leading-[1.04] text-ink">
+      Lo que cambia cuando trabajamos juntos
+    </h2>
+    <p class="mt-3.5 max-w-[56ch] text-[15.5px] leading-[1.7] text-[#4A5568]">Resultados que podés verificar al final de cada etapa.</p>
+
+    <div data-reveal class="mt-[clamp(24px,2.8vw,36px)] overflow-x-auto rounded-[14px] border border-ink/[.08]">
+      <table class="w-full min-w-[680px] border-collapse text-[14.5px]">
+        <thead>
+          <tr class="text-left">
+            <th class="bg-[#F8F7FC] px-5 py-3.5 text-[11px] font-bold tracking-[1px] uppercase text-[#5C6B8A] border-b border-ink/[.08]">Hoy, sin sistema</th>
+            <th class="bg-[#F8F7FC] px-5 py-3.5 text-[11px] font-bold tracking-[1px] uppercase text-[#5C6B8A] border-b border-ink/[.08]">Con HR Strategy Partners</th>
+            <th class="bg-[#F8F7FC] px-5 py-3.5 text-[11px] font-bold tracking-[1px] uppercase text-[#5C6B8A] border-b border-ink/[.08] whitespace-nowrap">Se verifica en</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filas.map((f) => (
+            <tr class="border-b border-ink/[.06] last:border-b-0">
+              <td class="px-5 py-4 align-top text-[#4A5568] leading-[1.55]">{f.antes}</td>
+              <td class="px-5 py-4 align-top text-ink font-medium leading-[1.55]">{f.despues}</td>
+              <td class="px-5 py-4 align-top text-brand-blue font-semibold whitespace-nowrap">{f.cuando}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-[clamp(24px,2.8vw,36px)]">
+      <p class="m-0 text-[13px] font-bold tracking-[1.5px] uppercase text-[#5C6B8A]">Y en tu día a día</p>
+      <ul class="mt-3.5 grid gap-2.5 max-w-[70ch]">
+        {diaADia.map((linea) => (
+          <li class="flex gap-2.5 text-[15.5px] leading-[1.6] text-ink">
+            <span class="flex-none text-brand-blue" aria-hidden="true">→</span>
+            <span>{linea}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+// Pegar acá la URL de implementación del Apps Script (termina en /exec).
+// Mientras esté vacía, la sección no se muestra.
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz-JkmRWOzgSascZHzRVED01-Sd93gN-ig6pXcypv4sLoTNVu6jhnFo5aU1HeQdAJxD/exec';
+---
+<section id="recurso" data-resource-section data-apps-script-url={APPS_SCRIPT_URL} class="hidden bg-[#F8F7FC] px-4 sm:px-8 lg:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
+  <div
+    class="max-w-[1200px] mx-auto bg-white rounded-[20px] shadow-card grid grid-cols-1 sm:grid-cols-[minmax(240px,340px)_1fr] items-stretch overflow-hidden"
+  >
+    <div data-resource-visual class="relative min-h-[220px] sm:min-h-0" style="background:linear-gradient(135deg,#1B4E9F 0%,#7B5CC4 55%,#C84FAE 100%)" aria-hidden="true">
+      <img data-resource-imagen alt="" class="hidden absolute inset-0 w-full h-full object-cover" />
+      <svg data-resource-icono-default viewBox="0 0 24 24" class="absolute inset-0 m-auto w-16 h-16" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <path d="M14 2v6h6" />
+        <path d="M9 13h6M9 17h4" />
+      </svg>
+      <span class="absolute bottom-4 right-4 grid place-items-center w-10 h-10 rounded-full bg-white shadow-[0_4px_14px_rgba(12,22,48,.22)]">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#1B4E9F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14" /></svg>
+      </span>
+    </div>
+
+    <div class="p-[clamp(20px,2.6vw,32px)]">
+      <p class="mb-2.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Recurso gratuito</p>
+      <h2 data-resource-titulo class="m-0 max-w-[30ch] text-[clamp(19px,2vw,25px)] font-extrabold tracking-[-1px] leading-[1.15] text-ink min-h-[1.2em] bg-[#EFECFB] rounded-[8px] [&:not(:empty)]:bg-transparent">&nbsp;</h2>
+      <p data-resource-descripcion class="mt-2 max-w-[56ch] text-[14px] leading-[1.6] text-[#4A5568] min-h-[1.5em] bg-[#EFECFB] rounded-[8px] [&:not(:empty)]:bg-transparent">&nbsp;</p>
+
+      <div data-resource-widget class="mt-4">
+        <form data-resource-form novalidate class="grid gap-2.5 sm:grid-cols-3">
+          <label class="flex flex-col gap-1">
+            <span class="text-[12px] font-semibold text-[#4A5568]">Nombre</span>
+            <input type="text" required name="nombre" autocomplete="name" class="min-w-0 w-full px-3.5 py-[10px] rounded-[8px] border-0 bg-[#F3F2FA] text-[14px] text-ink" />
+            <span data-field-error="nombre" class="hidden text-[11.5px] font-semibold text-[#B33A99]"></span>
+          </label>
+          <label class="flex flex-col gap-1">
+            <span class="text-[12px] font-semibold text-[#4A5568]">Email</span>
+            <input type="email" required name="email" autocomplete="email" class="min-w-0 w-full px-3.5 py-[10px] rounded-[8px] border-0 bg-[#F3F2FA] text-[14px] text-ink" />
+            <span data-field-error="email" class="hidden text-[11.5px] font-semibold text-[#B33A99]"></span>
+          </label>
+          <label class="flex flex-col gap-1">
+            <span class="text-[12px] font-semibold text-[#4A5568]">WhatsApp <span class="font-normal text-[#5C6B8A]">(opc.)</span></span>
+            <input type="tel" name="telefono" inputmode="tel" autocomplete="tel" placeholder="+54 9 387 000 0000" class="min-w-0 w-full px-3.5 py-[10px] rounded-[8px] border-0 bg-[#F3F2FA] text-[14px] text-ink" />
+            <span data-field-error="telefono" class="hidden text-[11.5px] font-semibold text-[#B33A99]"></span>
+          </label>
+          <button
+            type="submit"
+            disabled
+            data-resource-submit
+            class="sm:col-span-3 mt-1 px-6 py-[12px] rounded-full border-0 bg-brand-blue text-white text-[13.5px] font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:enabled:bg-[#153E7E] transition"
+          >Cargando…</button>
+          <p data-resource-error class="hidden sm:col-span-3 text-[12.5px] text-[#B33A99] font-semibold"></p>
+        </form>
+
+        <div data-resource-success class="hidden flex-col gap-2.5">
+          <p class="text-[14px] font-semibold text-ink">Gracias — ya podés descargarlo.</p>
+          <a
+            data-resource-download
+            href="#"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 self-start px-6 py-[12px] rounded-full border-0 bg-brand-blue text-white text-[13.5px] font-bold hover:bg-[#153E7E] transition"
+          >
+            Descargar PDF
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,8 +1,8 @@
 function initHeader() {
   const header = document.querySelector('[data-header]');
   if (!header) return;
-  const BASE_BG = 'bg-[rgba(12,22,48,.35)]';
-  const SCROLLED_CLASSES = ['bg-[rgba(12,22,48,.9)]', 'shadow-[0_8px_34px_rgba(12,22,48,.26)]'];
+  const BASE_BG = 'bg-[rgba(58,58,65,.45)]';
+  const SCROLLED_CLASSES = ['bg-[rgba(58,58,65,.96)]', 'shadow-[0_8px_34px_rgba(12,22,48,.26)]'];
   const onScroll = () => {
     const scrolled = (window.scrollY || document.documentElement.scrollTop) > 80;
     header.classList.toggle(BASE_BG, !scrolled);
@@ -74,218 +74,6 @@ function initHeroVideo() {
   tryPlay();
 }
 
-function initHeroMetrics() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const counters = Array.from(document.querySelectorAll('[data-count]'));
-  const bars = Array.from(document.querySelectorAll('[data-bar]'));
-  const segs = Array.from(document.querySelectorAll('[data-seg]'));
-  if (!counters.length && !bars.length && !segs.length) return;
-
-  const DURATION = 2400;
-  const DELAY = 600;
-  const ease = (t) => 1 - Math.pow(1 - t, 3);
-
-  const counterCfg = counters.map((el) => ({
-    el,
-    from: parseFloat(el.dataset.countFrom || '0'),
-    to: parseFloat(el.dataset.count),
-    prefix: el.dataset.countPrefix || ''
-  }));
-  const barCfg = bars.map((el) => ({
-    el,
-    from: parseFloat(el.dataset.barFrom || '0'),
-    to: parseFloat(el.dataset.barTo)
-  }));
-  segs.forEach((s) => s.classList.add('transition-all', 'duration-300', 'origin-left', 'opacity-0', 'scale-x-0'));
-
-  const render = (p) => {
-    const e = ease(p);
-    counterCfg.forEach(({ el, from, to, prefix }) => {
-      el.textContent = prefix + Math.round(from + (to - from) * e);
-    });
-    barCfg.forEach(({ el, from, to }) => {
-      el.style.width = from + (to - from) * e + '%';
-    });
-    segs.forEach((s, i) => {
-      const on = e * segs.length >= i + 1;
-      s.classList.toggle('opacity-0', !on);
-      s.classList.toggle('scale-x-0', !on);
-    });
-  };
-
-  render(0);
-  setTimeout(() => {
-    const t0 = performance.now();
-    const tick = (now) => {
-      const p = Math.min(1, (now - t0) / DURATION);
-      render(p);
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, DELAY);
-}
-
-function initMobileMetrics() {
-  const root = document.querySelector('[data-mobile-metrics]');
-  if (!root) return;
-  const slides = Array.from(root.querySelectorAll('[data-mobile-slide]'));
-  const viewport = root.querySelector('[data-mobile-viewport]');
-  const controls = root.querySelector('[data-mobile-controls]');
-  const prev = root.querySelector('[data-mobile-prev]');
-  const next = root.querySelector('[data-mobile-next]');
-  if (slides.length < 2 || !viewport || !controls || !prev || !next) return;
-  const desktop = matchMedia('(min-width: 640px)');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let index = 0;
-  let paused = reduced.matches;
-  let visible = true;
-  let hovered = false;
-  let timer;
-  let touchStart;
-  let transitioning = false;
-  let animation;
-
-  const render = () => {
-    slides.forEach((slide, i) => {
-      slide.dataset.active = String(i === index);
-      slide.setAttribute('aria-hidden', String(i !== index));
-    });
-  };
-  const animateSlide = async (slide, frames) => {
-    animation = slide.animate(frames, { duration: 240, easing: 'ease-in-out', fill: 'forwards' });
-    await animation.finished.catch(() => {});
-    animation.cancel();
-    animation = null;
-  };
-  const change = async (direction) => {
-    if (transitioning) return;
-    const nextIndex = (index + direction + slides.length) % slides.length;
-    if (reduced.matches || desktop.matches || !slides[index].animate) {
-      index = nextIndex;
-      render();
-      return;
-    }
-    transitioning = true;
-    try {
-      await animateSlide(slides[index], [
-        { opacity: 1, transform: 'translateX(0)' },
-        { opacity: 0, transform: `translateX(${-direction * 16}px)` }
-      ]);
-      index = nextIndex;
-      render();
-      if (!reduced.matches && !desktop.matches && visible && !document.hidden) {
-        await animateSlide(slides[index], [
-          { opacity: 0, transform: `translateX(${direction * 16}px)` },
-          { opacity: 1, transform: 'translateX(0)' }
-        ]);
-      }
-    } finally {
-      transitioning = false;
-    }
-  };
-  const sync = () => {
-    clearInterval(timer);
-    if (desktop.matches || reduced.matches || !visible || document.hidden) animation?.finish();
-    const playing = !desktop.matches && !reduced.matches && !paused && visible && !hovered && !document.hidden;
-    viewport.setAttribute('aria-live', playing ? 'off' : 'polite');
-    if (playing) timer = setInterval(() => change(1), 5000);
-  };
-  const move = (direction) => {
-    paused = true;
-    sync();
-    change(direction);
-  };
-  prev.addEventListener('click', () => move(-1));
-  next.addEventListener('click', () => move(1));
-  root.addEventListener('focusin', () => {
-    paused = true;
-    sync();
-  });
-  root.addEventListener('pointerenter', (event) => {
-    if (event.pointerType === 'mouse') { hovered = true; sync(); }
-  });
-  root.addEventListener('pointerleave', () => { hovered = false; sync(); });
-  viewport.addEventListener('pointerdown', (event) => {
-    touchStart = { x: event.clientX, y: event.clientY };
-  });
-  viewport.addEventListener('pointerup', (event) => {
-    if (!touchStart) return;
-    const dx = event.clientX - touchStart.x;
-    const dy = event.clientY - touchStart.y;
-    touchStart = null;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
-  });
-  viewport.addEventListener('pointercancel', () => { touchStart = null; });
-  desktop.addEventListener('change', sync);
-  reduced.addEventListener('change', () => { paused = reduced.matches || paused; sync(); });
-  document.addEventListener('visibilitychange', sync);
-  if (typeof IntersectionObserver !== 'undefined') {
-    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: 0.1 }).observe(root);
-  }
-  controls.classList.remove('hidden');
-  render();
-  sync();
-}
-
-function initStatsCarousel() {
-  const track = document.querySelector('[data-stats-carousel]');
-  const prev = document.querySelector('[data-stats-prev]');
-  const next = document.querySelector('[data-stats-next]');
-  if (!track || !prev || !next) return;
-
-  const step = () => {
-    const card = track.firstElementChild;
-    return card ? card.getBoundingClientRect().width + 12 : track.clientWidth * 0.8;
-  };
-  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-
-  const update = () => {
-    const scrollable = track.scrollWidth > track.clientWidth + 8;
-    prev.classList.toggle('hidden', !scrollable);
-    next.classList.toggle('hidden', !scrollable);
-    prev.classList.toggle('opacity-40', track.scrollLeft <= 4);
-    next.classList.toggle('opacity-40', track.scrollLeft >= track.scrollWidth - track.clientWidth - 4);
-  };
-  track.addEventListener('scroll', update, { passive: true });
-  addEventListener('resize', update);
-  update();
-}
-
-function initMethodology() {
-  const track = document.querySelector('[data-method-track]');
-  const controls = document.querySelector('[data-method-controls]');
-  const prev = document.querySelector('[data-method-prev]');
-  const next = document.querySelector('[data-method-next]');
-  if (!track || !controls || !prev || !next) return;
-
-  const update = () => {
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    const scrollable = maxScroll > 1;
-    controls.classList.toggle('hidden', !scrollable);
-    controls.classList.toggle('flex', scrollable);
-    if (scrollable) track.setAttribute('aria-describedby', 'metodologia-ayuda');
-    else track.removeAttribute('aria-describedby');
-    prev.disabled = track.scrollLeft <= 1;
-    next.disabled = track.scrollLeft >= maxScroll - 1;
-  };
-  const move = (direction) => {
-    const rail = track.firstElementChild;
-    const step = rail.querySelector('[data-reveal]');
-    if (!step) return;
-    track.scrollBy({
-      left: direction * (step.getBoundingClientRect().width + (parseFloat(getComputedStyle(rail).columnGap) || 0)),
-      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-    });
-  };
-  prev.addEventListener('click', () => move(-1));
-  next.addEventListener('click', () => move(1));
-  track.addEventListener('scroll', update, { passive: true });
-  addEventListener('resize', update);
-  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(update).observe(track);
-  update();
-}
-
 function initReveal() {
   const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
   if (!nodes.length || matchMedia('(prefers-reduced-motion: reduce)').matches || typeof IntersectionObserver === 'undefined') {
@@ -309,47 +97,6 @@ function initReveal() {
   }, 700);
 }
 
-function initExtraCard() {
-  const el = document.querySelector('[data-extra-card]');
-  if (!el) return;
-  const extras = JSON.parse(el.dataset.extras || '[]');
-  if (!extras.length) return;
-  const fade = el.querySelector('[data-extra-fade]');
-  const numEl = el.querySelector('[data-extra-num]');
-  const unitEl = el.querySelector('[data-extra-unit]');
-  const titleEl = el.querySelector('[data-extra-title]');
-  const subEl = el.querySelector('[data-extra-sub]');
-  const dots = Array.from(el.querySelectorAll('[data-extra-dot]'));
-  let index = 0;
-
-  const render = () => {
-    const item = extras[index];
-    numEl.textContent = item.num;
-    numEl.style.color = item.accent;
-    unitEl.textContent = item.unit;
-    unitEl.style.color = item.accent;
-    titleEl.textContent = item.title;
-    subEl.textContent = item.sub;
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('w-3.5', i === index);
-      dot.classList.toggle('bg-white/80', i === index);
-      dot.classList.toggle('w-1', i !== index);
-      dot.classList.toggle('bg-white/25', i !== index);
-    });
-  };
-  render();
-
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  setInterval(() => {
-    fade.classList.add('opacity-0');
-    setTimeout(() => {
-      index = (index + 1) % extras.length;
-      render();
-      fade.classList.remove('opacity-0');
-    }, 350);
-  }, 3400);
-}
-
 function initWhatsApp() {
   const btn = document.querySelector('[data-whatsapp]');
   if (!btn) return;
@@ -368,11 +115,9 @@ function initWhatsApp() {
 }
 
 const TIERS = [
-  { name: 'Arquitectura de Capital Humano', keywords: ['desde cero', 'armar', 'estructura', 'cultura', 'todo', 'transformar', 'integral', 'area de rrhh', 'proceso completo', 'despedir', 'despido', 'desvincular', 'reestructurar', 'reducir', 'organigrama', 'funciones', 'conflicto', 'clima', 'sueldo', 'salario', 'equipo no rinde', 'desmotivad'], reply: 'Por lo que contás, te recomiendo Arquitectura de Capital Humano: es el programa más completo, rediseña estructura, cultura, métricas y liderazgo en 12 semanas.' },
-  { name: 'Estructura Express', keywords: ['rapido', 'urgente', '90 dias', 'caos', 'caotico', 'orden', 'ya', 'desorden', 'apagar incendios', 'incendio'], reply: 'Te recomiendo Estructura Express: mismo diagnóstico y rediseño que Arquitectura, pero comprimido en 90 días con quick wins desde la semana 4.' },
-  { name: 'Atracción de Talento Crítico', keywords: ['contratar', 'vacante', 'buscar', 'reclutar', 'puesto', 'candidato', 'headhunting', 'posicion', 'no encuentro', 'no consigo', 'rotacion', 'se me va', 'se van', 'renuncia', 'fuga', 'retener', 'seleccion', 'entrevista'], reply: 'Te recomiendo Atracción de Talento Crítico: búsqueda ejecutiva con metodología Topgrading, pensada para cubrir bien un puesto clave.' },
-  { name: 'Desarrollo de Liderazgo', keywords: ['lider', 'lideres', 'manager', 'capacitar', 'formar', 'equipo directivo', 'gerentes', 'jefe', 'supervisor', 'delegar', 'mando medio'], reply: 'Te recomiendo Desarrollo de Liderazgo: formación de líderes y managers con entregables medibles, sin tocar estructura ni contratación.' },
-  { name: 'Fractional CPO', keywords: ['director de rrhh', 'cpo', 'direccion estrategica', 'full time', 'comite', 'externalizar', 'tercerizar direccion', 'asesor', 'acompañamiento', 'estrategia de personas'], reply: 'Te recomiendo Fractional CPO: dirección estratégica de capital humano de forma continua, sin el costo de una posición full-time.' }
+  { name: 'Auditoría de Salud Organizacional', keywords: ['no se bien', 'no se donde', 'no tengo medido', 'no se cuanto', 'diagnostico', 'no se por donde', 'algo anda mal', 'algo no funciona', 'quiero entender', 'necesito claridad', 'no puedo medir', 'no lo tengo claro'], reply: 'Por lo que contás, te recomiendo la Auditoría de Salud Organizacional: en 15 días tenés visibilidad completa de dónde te está costando y cuánto.' },
+  { name: 'Programa Estructura Express', keywords: ['rotacion', 'se me va', 'se van', 'renuncia', 'fuga', 'caos', 'caotico', 'desorden', 'urgente', 'apagar incendios', 'incendio', 'estructura', 'proceso', 'procesos', 'contratar', 'seleccion', 'conflicto', 'clima', 'lider', 'lideres', 'mando medio', 'no rinde', 'desmotivad'], reply: 'Te recomiendo el Programa Estructura Express: 12 semanas para resolver el problema y dejar un sistema funcionando, no solo un análisis.' },
+  { name: 'Fractional CPO', keywords: ['ya resolvimos', 'no quiero que se caiga', 'direccion continua', 'cpo', 'full time', 'comite', 'crecer', 'crece', 'sostener', 'acompañamiento permanente', 'degradarse'], reply: 'Te recomiendo Fractional CPO: dirección ejecutiva de la estructura a tiempo parcial, para que lo resuelto no vuelva a degradarse mientras la empresa crece.' }
 ];
 
 function matchTier(text) {
@@ -386,20 +131,18 @@ function matchTier(text) {
       best = tier;
     }
   });
-  if (!best) return 'No encontré una coincidencia clara. Lo mejor es agendar el diagnóstico gratuito de 45 minutos más abajo y te orientamos con precisión.';
+  if (!best) return 'No encontré una coincidencia clara. Lo mejor es agendar el diagnóstico gratuito de 30 minutos más abajo y te orientamos con precisión.';
   return best.reply;
 }
 
 const PLAN_PROMPT =
-  'Sos el asistente de HR Strategy Partners, consultora de capital humano para PyMEs del NOA argentino. ' +
-  'Recomendá UNO de estos 5 programas según la situación del usuario, en 2-3 oraciones, tono cálido y directo, español rioplatense (voseo), sin listas ni formato:\n' +
-  '1. Arquitectura de Capital Humano — rediseño integral (estructura, cultura, métricas, liderazgo) en 12 semanas. El más completo.\n' +
-  '2. Estructura Express — mismo diagnóstico comprimido en 90 días, quick wins desde la semana 4.\n' +
-  '3. Atracción de Talento Crítico — búsqueda ejecutiva Topgrading para puestos clave.\n' +
-  '4. Desarrollo de Liderazgo — formación de líderes y managers con entregables medibles.\n' +
-  '5. Fractional CPO — dirección estratégica continua de capital humano sin costo full-time.\n' +
-  'Si el texto no alcanza para recomendar, sugerí agendar el diagnóstico gratuito de 45 minutos.\n' +
-  'Empezá SIEMPRE la respuesta con [[N]] donde N es el número del programa elegido (1 al 5); si no alcanza el contexto usá [[0]]. Después seguí con el texto.\n' +
+  'Sos el asistente de HR Strategy Partners, firma de arquitectura organizacional para empresas en crecimiento del NOA argentino. ' +
+  'Recomendá UNO de estos 3 niveles según la situación del usuario, en 2-3 oraciones, tono cálido y directo, español rioplatense (voseo), sin listas ni formato. No uses las palabras "RRHH", "recursos humanos" ni "capital humano":\n' +
+  '1. Auditoría de Salud Organizacional — diagnóstico de 15 días, para quien intuye el problema pero no lo tiene medido.\n' +
+  '2. Programa Estructura Express — transformación de 12 semanas, para quien ya sabe dónde pierde capacidad y necesita que se resuelva.\n' +
+  '3. Fractional CPO — dirección ejecutiva continua a tiempo parcial, para sostener lo resuelto mientras la empresa crece.\n' +
+  'Si el texto no alcanza para recomendar, sugerí agendar el diagnóstico gratuito de 30 minutos.\n' +
+  'Empezá SIEMPRE la respuesta con [[N]] donde N es el número del nivel elegido (1 al 3); si no alcanza el contexto usá [[0]]. Después seguí con el texto.\n' +
   'Situación del usuario: "';
 
 async function aiTierReply(text) {
@@ -524,49 +267,151 @@ function initPlanFinder() {
   });
 }
 
-function initContactForm() {
-  const form = document.querySelector('[data-contact-form]');
-  const success = document.querySelector('[data-contact-success]');
-  const resetBtn = document.querySelector('[data-contact-reset]');
-  if (!form || !success) return;
-
-  const section = form.closest('#contacto');
-  const extraToggle = form.querySelector('[data-contact-extra-toggle]');
+function initContactDetails() {
+  const section = document.querySelector('#contacto');
   const detailsToggle = section?.querySelector('[data-contact-details-toggle]');
-  const mobile = matchMedia('(max-width: 639px)');
-  const setExtraOpen = (open) => {
-    form.dataset.extraOpen = String(open);
-    extraToggle?.setAttribute('aria-expanded', String(open));
-    if (extraToggle) extraToggle.textContent = open ? 'Ocultar datos adicionales' : 'Agregar datos de mi empresa (opcional)';
-  };
-  extraToggle?.addEventListener('click', () => setExtraOpen(form.dataset.extraOpen !== 'true'));
-  detailsToggle?.addEventListener('click', () => {
+  if (!section || !detailsToggle) return;
+
+  detailsToggle.addEventListener('click', () => {
     const open = section.dataset.detailsOpen !== 'true';
     section.dataset.detailsOpen = String(open);
     detailsToggle.setAttribute('aria-expanded', String(open));
   });
-  const syncRequired = () => {
-    ['empresa', 'empleados'].forEach((name) => {
-      const field = form.elements.namedItem(name);
-      if (field) field.required = !mobile.matches;
+}
+
+const RESOURCE_VALIDATORS = {
+  nombre: {
+    test: (v) => v.trim().length >= 2 && /[a-zA-ZÀ-ÿ]/.test(v),
+    message: 'Ingresá tu nombre completo.'
+  },
+  email: {
+    test: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    message: 'Ingresá un email válido (con @ y dominio, ej: nombre@empresa.com).'
+  },
+  telefono: {
+    test: (v) => v.trim() === '' || /^[+]?[\d\s()-]{6,20}$/.test(v.trim()),
+    message: 'Ingresá solo números (podés incluir +, espacios o guiones).'
+  }
+};
+
+function initResourceFieldValidation(form) {
+  Object.keys(RESOURCE_VALIDATORS).forEach((name) => {
+    const field = form.elements.namedItem(name);
+    const errorEl = form.querySelector(`[data-field-error="${name}"]`);
+    if (!field || !errorEl) return;
+    field.addEventListener('blur', () => validateResourceField(field, errorEl));
+    field.addEventListener('input', () => {
+      if (!errorEl.classList.contains('hidden')) validateResourceField(field, errorEl);
     });
-  };
-  mobile.addEventListener('change', syncRequired);
-  syncRequired();
-  form.addEventListener('reset', () => setExtraOpen(false));
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    form.classList.add('hidden');
-    success.classList.remove('hidden');
-    success.classList.add('flex');
   });
+}
 
-  resetBtn?.addEventListener('click', () => {
-    form.reset();
-    form.classList.remove('hidden');
-    success.classList.add('hidden');
-    success.classList.remove('flex');
+function validateResourceField(field, errorEl) {
+  const validator = RESOURCE_VALIDATORS[field.name];
+  if (!validator) return true;
+  const valid = validator.test(field.value);
+  errorEl.textContent = valid ? '' : validator.message;
+  errorEl.classList.toggle('hidden', valid);
+  field.classList.toggle('ring-2', !valid);
+  field.classList.toggle('ring-[#B33A99]', !valid);
+  return valid;
+}
+
+function validateResourceForm(form) {
+  let allValid = true;
+  Object.keys(RESOURCE_VALIDATORS).forEach((name) => {
+    const field = form.elements.namedItem(name);
+    const errorEl = form.querySelector(`[data-field-error="${name}"]`);
+    if (!field || !errorEl) return;
+    if (!validateResourceField(field, errorEl)) allValid = false;
+  });
+  return allValid;
+}
+
+async function initResourceForm() {
+  const section = document.querySelector('[data-resource-section]');
+  if (!section) return;
+
+  const scriptUrl = section.dataset.appsScriptUrl;
+  const titulo = section.querySelector('[data-resource-titulo]');
+  const descripcion = section.querySelector('[data-resource-descripcion]');
+  const form = section.querySelector('[data-resource-form]');
+  const success = section.querySelector('[data-resource-success]');
+  const errorEl = section.querySelector('[data-resource-error]');
+  const submitBtn = section.querySelector('[data-resource-submit]');
+  const downloadLink = section.querySelector('[data-resource-download]');
+  if (!scriptUrl || !form || !success) return;
+
+  let recursoId = null;
+
+  try {
+    const res = await fetch(scriptUrl, { cache: 'no-store' });
+    const json = await res.json();
+    if (!json.ok || !json.recurso) throw new Error(json.error || 'Sin recurso activo.');
+
+    recursoId = json.recurso.id;
+    titulo.textContent = json.recurso.titulo;
+    descripcion.textContent = json.recurso.descripcion;
+    submitBtn.textContent = json.recurso.boton || 'Descargar gratis';
+    submitBtn.disabled = false;
+
+    const imagenEl = section.querySelector('[data-resource-imagen]');
+    const iconoDefault = section.querySelector('[data-resource-icono-default]');
+    if (json.recurso.imagenUrl && imagenEl) {
+      imagenEl.src = json.recurso.imagenUrl;
+      imagenEl.addEventListener(
+        'load',
+        () => {
+          imagenEl.classList.remove('hidden');
+          iconoDefault?.classList.add('hidden');
+        },
+        { once: true }
+      );
+      imagenEl.addEventListener('error', () => imagenEl.classList.add('hidden'), { once: true });
+    }
+
+    section.classList.remove('hidden');
+  } catch (err) {
+    return; // sin recurso configurado: la sección queda oculta
+  }
+
+  initResourceFieldValidation(form);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.classList.add('hidden');
+
+    if (!validateResourceForm(form)) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+
+    const payload = {
+      nombre: form.elements.namedItem('nombre').value.trim(),
+      email: form.elements.namedItem('email').value.trim(),
+      telefono: form.elements.namedItem('telefono').value.trim(),
+      recurso: recursoId
+    };
+
+    try {
+      const res = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      const json = await res.json();
+      if (!json.ok) throw new Error(json.error || 'No se pudo procesar la descarga.');
+
+      downloadLink.href = json.url;
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+      success.classList.add('flex');
+    } catch (err) {
+      errorEl.textContent = 'Hubo un problema al procesar tu descarga. Probá de nuevo en un minuto.';
+      errorEl.classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Descargar gratis';
+    }
   });
 }
 
@@ -574,13 +419,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMenu();
   initHeroVideo();
-  initHeroMetrics();
-  initMobileMetrics();
-  initStatsCarousel();
-  initMethodology();
   initReveal();
-  initExtraCard();
   initWhatsApp();
   initPlanFinder();
-  initContactForm();
+  initContactDetails();
+  initResourceForm();
 });

@@ -1,27 +1,30 @@
 ---
+const links = [
+  { href: '#costo', label: 'El costo' },
+  { href: '#niveles', label: 'Niveles' },
+  { href: '#como-trabajamos', label: 'Cómo trabajamos' },
+  { href: '#por-que', label: 'Por qué HRSP' },
+  { href: '#quien-dirige', label: 'Quién dirige' }
+];
 ---
 <header
   data-header
-  class="fixed top-0 inset-x-0 z-[60] px-4 sm:px-8 lg:px-16 py-[15px] transition-[background-color,box-shadow] duration-300 bg-[rgba(12,22,48,.35)] backdrop-blur-xl backdrop-saturate-150"
+  class="fixed top-0 inset-x-0 z-[60] px-4 sm:px-8 lg:px-16 py-[15px] transition-[background-color,box-shadow] duration-300 bg-[rgba(58,58,65,.45)] backdrop-blur-xl backdrop-saturate-150"
 >
   <div class="w-full max-w-[1200px] mx-auto flex items-center justify-between gap-2 sm:gap-6">
     <a href="#inicio" class="flex items-center gap-3 text-white flex-none hover:opacity-80 transition">
       <span aria-hidden="true" class="brand-sym grid place-items-center w-[38px] h-[38px] rounded-full text-white font-extrabold text-[11px] tracking-[-.5px] ring-2 ring-white/15 flex-none">HR</span>
-      <span class="flex flex-col leading-none">
-        <strong class="text-[10px] sm:text-[11px] font-extrabold tracking-[1px] sm:tracking-[2px] uppercase whitespace-nowrap">HR Strategy Partners</strong>
-        <span class="mt-[3px] text-[8.5px] font-medium tracking-[2.5px] uppercase text-white/50 whitespace-nowrap">Alianzas Estratégicas</span>
-      </span>
+      <strong class="text-[10px] sm:text-[11px] font-extrabold tracking-[1px] sm:tracking-[2px] uppercase whitespace-nowrap">HR Strategy Partners</strong>
       <span class="sr-only">— inicio</span>
     </a>
     <nav class="hidden lg:flex items-center gap-0.5 lg:gap-2 justify-end">
-      <a href="#servicios" class="px-2.5 py-2 rounded-full text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/[.16] transition">Servicios</a>
-      <a href="#metodologia" class="px-2.5 py-2 rounded-full text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/[.16] transition">Metodología</a>
-      <a href="#nosotros" class="px-2.5 py-2 rounded-full text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/[.16] transition">Nosotros</a>
-      <a href="#resultados" class="px-2.5 py-2 rounded-full text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/[.16] transition">Resultados</a>
+      {links.map((link) => (
+        <a href={link.href} class="px-2.5 py-2 rounded-full text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/[.16] transition">{link.label}</a>
+      ))}
       <a
         href="#contacto"
-        class="ml-1.5 px-[18px] py-3 rounded-full bg-[#1B4E9F] text-white font-bold text-[13px] whitespace-nowrap shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] hover:-translate-y-px transition"
-        >Agendar diagnóstico</a
+        class="ml-1.5 px-[18px] py-3 rounded-full bg-brand-blue text-white font-bold text-[13px] whitespace-nowrap shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] hover:-translate-y-px transition"
+        >Diagnóstico de 30 minutos</a
       >
     </nav>
     <button
@@ -39,17 +42,16 @@
   <nav
     data-mobile-menu
     id="menu-movil"
-    class="hidden max-h-[calc(100svh-100px)] overflow-y-auto lg:!hidden mt-3 mx-auto w-full max-w-[1200px] rounded-[14px] bg-[rgba(12,22,48,.94)] backdrop-blur-xl border border-white/10 p-3 flex-col gap-1"
+    class="hidden max-h-[calc(100svh-100px)] overflow-y-auto lg:!hidden mt-3 mx-auto w-full max-w-[1200px] rounded-[14px] bg-[rgba(58,58,65,.97)] backdrop-blur-xl border border-white/10 p-3 flex-col gap-1"
     aria-label="Menú móvil"
   >
-    <a href="#servicios" class="block px-4 py-3 rounded-xl text-[15px] font-semibold text-white/90 hover:bg-white/10 transition">Servicios</a>
-    <a href="#metodologia" class="block px-4 py-3 rounded-xl text-[15px] font-semibold text-white/90 hover:bg-white/10 transition">Metodología</a>
-    <a href="#nosotros" class="block px-4 py-3 rounded-xl text-[15px] font-semibold text-white/90 hover:bg-white/10 transition">Nosotros</a>
-    <a href="#resultados" class="block px-4 py-3 rounded-xl text-[15px] font-semibold text-white/90 hover:bg-white/10 transition">Resultados</a>
+    {links.map((link) => (
+      <a href={link.href} class="block px-4 py-3 rounded-xl text-[15px] font-semibold text-white/90 hover:bg-white/10 transition">{link.label}</a>
+    ))}
     <a
       href="#contacto"
-      class="mt-1.5 block text-center px-4 py-3.5 rounded-xl bg-[#1B4E9F] text-white font-bold text-[15px] shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] transition"
-      >Agendar diagnóstico</a
+      class="mt-1.5 block text-center px-4 py-3.5 rounded-xl bg-brand-blue text-white font-bold text-[15px] shadow-[0_8px_28px_rgba(27,78,159,.4)] hover:bg-[#153E7E] transition"
+      >Diagnóstico de 30 minutos</a
     >
   </nav>
 </header>

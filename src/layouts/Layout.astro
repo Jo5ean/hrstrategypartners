@@ -4,11 +4,13 @@ import '../styles/global.css';
 export interface Props {
   title?: string;
   description?: string;
+  ogTitle?: string;
 }
 
 const {
-  title = 'HR Strategy Partners · Fractional CPO · Arquitectura de Capital Humano',
-  description = 'Dirección estratégica de capital humano para PyMEs en escala del NOA. Metodología Topgrading, entregables medibles y ROI verificable desde el primer día.'
+  title = 'HR Strategy Partners · Arquitectura organizacional para empresas en crecimiento · NOA',
+  description = 'Lo que no estructurás, lo pagás. Convertimos estructura en capacidad para crecer. Diagnóstico de 30 minutos, sin costo. Salta · NOA · Argentina.',
+  ogTitle = 'Lo que no estructurás, lo pagás. · HR Strategy Partners'
 } = Astro.props;
 ---
 <!doctype html>
@@ -22,7 +24,7 @@ const {
     <meta name="theme-color" content="#0C1630" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="https://hrstrategypartners.com.ar/" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hrstrategypartners.com.ar/" />

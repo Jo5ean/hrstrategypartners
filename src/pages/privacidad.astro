@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const secciones = [
+  {
+    titulo: '1. Responsable del tratamiento',
+    texto: 'HR Strategy Partners, con domicilio operativo en Salta, Argentina, es responsable del tratamiento de los datos personales que se recaban a través de este sitio (hrstrategypartners.com.ar) y de los canales de contacto asociados (correo, WhatsApp, formularios y agenda de reuniones). Contacto: contacto@hrstrategypartners.com.ar.'
+  },
+  {
+    titulo: '2. Datos que recabamos',
+    texto: 'Recabamos los datos que proporcionás voluntariamente al agendar una reunión, completar un formulario de descarga de recursos o escribirnos por correo o WhatsApp: nombre, empresa, correo electrónico, teléfono y la información que decidas compartir sobre tu organización. No recabamos datos sensibles en los términos del artículo 2 de la Ley 25.326.'
+  },
+  {
+    titulo: '3. Finalidad',
+    texto: 'Usamos estos datos exclusivamente para responder tu consulta, coordinar la reunión de diagnóstico solicitada, enviarte el material descargable pedido y, si lo autorizás, mantenerte informado sobre contenidos relacionados. No vendemos ni cedemos tus datos a terceros con fines comerciales.'
+  },
+  {
+    titulo: '4. Base legal y consentimiento',
+    texto: 'El tratamiento se basa en tu consentimiento libre, expreso e informado, otorgado al completar un formulario o al iniciar contacto directo. Podés retirar ese consentimiento en cualquier momento escribiendo a contacto@hrstrategypartners.com.ar.'
+  },
+  {
+    titulo: '5. Conservación',
+    texto: 'Conservamos tus datos mientras exista una relación comercial o de contacto activa, y por el plazo adicional que exijan obligaciones legales o contables. Pasado ese plazo, los eliminamos o anonimizamos.'
+  },
+  {
+    titulo: '6. Tus derechos (Ley 25.326)',
+    texto: 'Como titular de los datos tenés derecho de acceso, rectificación, actualización y supresión (derecho al olvido), conforme a los artículos 14 a 16 de la Ley 25.326. Podés ejercerlos escribiendo a contacto@hrstrategypartners.com.ar. La Agencia de Acceso a la Información Pública, en su carácter de Órgano de Control de la Ley 25.326, tiene la atribución de atender denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por incumplimiento de las normas vigentes en materia de protección de datos personales.'
+  },
+  {
+    titulo: '7. Terceros que procesan datos',
+    texto: 'Usamos proveedores externos para operar el sitio y agendar reuniones (Google Calendar, Google Sheets/Apps Script y servicios de correo). Estos proveedores procesan los datos únicamente para prestar el servicio contratado, bajo sus propias políticas de privacidad.'
+  },
+  {
+    titulo: '8. Cookies y analítica',
+    texto: 'Este sitio puede usar cookies técnicas necesarias para su funcionamiento. Si en el futuro se incorpora analítica de terceros, esta sección se actualizará para detallar qué se mide y cómo desactivarla.'
+  }
+];
+---
+<Layout title="Aviso de privacidad · HR Strategy Partners" description="Cómo HR Strategy Partners recaba, usa y protege tus datos personales, conforme a la Ley 25.326.">
+  <div class="font-sans text-[#0C1630] bg-[#F8F7FC] overflow-x-hidden">
+    <Header />
+    <main id="contenido" class="px-4 sm:px-8 lg:px-16 py-[clamp(40px,6vw,80px)]">
+      <div class="max-w-[760px] mx-auto">
+        <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Aviso de privacidad</p>
+        <h1 class="m-0 text-[clamp(26px,3.4vw,40px)] font-extrabold tracking-[-1.8px] leading-[1.1] text-ink">Cómo tratamos tus datos personales</h1>
+        <p class="mt-4 text-[15px] leading-[1.7] text-[#5C6B8A]">Última actualización: 25 de septiembre de 2026.</p>
+
+        <div class="mt-6 rounded-[16px] border border-[rgba(12,22,48,.1)] bg-[#FFF7ED] px-5 py-4 text-[14.5px] leading-[1.65] text-[#6B4E16]">
+          Este texto fue redactado como borrador de referencia en base a la Ley 25.326 de Protección de Datos Personales de Argentina. No constituye asesoramiento legal: se recomienda su revisión por un profesional antes de considerarlo definitivo.
+        </div>
+
+        <div class="mt-[clamp(28px,3vw,40px)] grid gap-8">
+          {secciones.map((s) => (
+            <div>
+              <h2 class="m-0 text-[18px] font-bold text-ink">{s.titulo}</h2>
+              <p class="mt-2 text-[15px] leading-[1.75] text-[#4A5568]">{s.texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </div>
+</Layout>

@@ -1,49 +1,32 @@
 ---
-const steps = [
-  { n: '01', bg: '#E8EFFA', badge: '#1B4E9F', tagColor: '#1B4E9F', tag: 'Semanas 1–2', title: 'Diagnóstico Ejecutivo', desc: 'Entrevistas, métricas de talento y mapeo de riesgos críticos.', dark: false },
-  { n: '02', bg: '#EFECFB', badge: '#7B5CC4', tagColor: '#7859C1', tag: 'Semanas 3–4', title: 'Diseño del Sistema', desc: 'Estructura de roles, scorecards Topgrading y KPIs.', dark: false },
-  { n: '03', bg: '#E5F1F3', badge: '#258092', tagColor: '#197486', tag: 'Semanas 5–10', title: 'Implementación', desc: 'Ejecución con tu equipo y revisiones semanales.', dark: false },
-  { n: '04', bg: '#0C1630', badge: '#0C1630', tagColor: '#fff', tag: 'Semana 12', title: 'Medición y Entrega', desc: 'Métricas antes/después, ROI calculado y transferencia al equipo.', dark: true }
+const pasos = [
+  { n: '1', titulo: 'Diagnóstico gratuito', texto: 'Reunión de 30 minutos para mapear el problema, calcular juntos cuánto te está costando y definir el programa correcto. Sin costo ni compromiso de compra.', plazo: '30 min' },
+  { n: '2', titulo: 'Propuesta', texto: 'Documento ejecutivo de 1 página: diagnóstico preliminar, costo real de la ineficiencia, ROI estimado, programa recomendado, hoja de ruta y criterios de aceptación de cada entregable.', plazo: '48 horas' },
+  { n: '3', titulo: 'Decisión con datos', texto: 'Decidís con números, no con suposiciones. Si el ROI no es evidente en la propuesta, no avanzamos.', plazo: 'Tu ritmo' },
+  { n: '4', titulo: 'Activación', texto: 'Firma digital, carpeta compartida, workspace y kick-off. La primera semana no es de arranque: es de demostración.', plazo: '72 horas' },
+  { n: '5', titulo: 'Ejecución por hitos', texto: 'Reporte semanal, tablero de KPIs en tiempo real, reunión quincenal. Siempre sabés qué se hace y qué resultado genera.', plazo: 'Todo el programa' },
+  { n: '6', titulo: 'Transferencia', texto: 'Al finalizar, tu organización sostiene el sistema sola. Informe Final de Impacto Económico bajo ISO 30414, presentable a directorio.', plazo: 'Cierre' }
 ];
 ---
-<section id="metodologia" class="bg-[#F8F7FC] px-4 sm:px-8 lg:px-16 pb-[clamp(40px,4.4vw,64px)]">
-  <div class="max-w-[1200px] mx-auto bg-white rounded-[24px] p-[clamp(24px,3vw,44px)] shadow-[0_1px_3px_rgba(12,22,48,.06),0_12px_40px_rgba(12,22,48,.06)]">
-    <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-[#1B4E9F] underline underline-offset-4 decoration-2">Metodología</p>
-    <h2 class="m-0 max-w-[20ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-1.8px] leading-[1.04] text-[#0C1630]">
-      Doce semanas, cuatro entregables
-    </h2>
+<section id="como-trabajamos" class="bg-white px-4 sm:px-8 lg:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
+  <div class="max-w-[1200px] mx-auto">
+    <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Cómo trabajamos</p>
+    <h2 class="m-0 max-w-[20ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-1.8px] leading-[1.04] text-ink">Un solo camino. Sin sorpresas.</h2>
 
-    <div data-method-controls class="hidden mt-4 items-center justify-between flex-wrap gap-3">
-      <p id="metodologia-ayuda" class="text-[13px] leading-relaxed font-medium text-[#1B4E9F]">Deslizá para ver los 4 pasos</p>
-      <div class="flex gap-2">
-        <button data-method-prev type="button" aria-label="Ver paso anterior" aria-controls="metodologia-pasos" class="grid place-items-center w-11 h-11 rounded-full bg-[#E8EFFA] text-[#1B4E9F] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><span aria-hidden="true">←</span></button>
-        <button data-method-next type="button" aria-label="Ver paso siguiente" aria-controls="metodologia-pasos" class="grid place-items-center w-11 h-11 rounded-full bg-[#E8EFFA] text-[#1B4E9F] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><span aria-hidden="true">→</span></button>
-      </div>
-    </div>
-    <div id="metodologia-pasos" data-method-track role="region" aria-label="Los cuatro pasos de nuestra metodología" tabindex="0" class="overflow-x-auto mt-[clamp(22px,2.6vw,34px)] pb-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1B4E9F] focus-visible:outline-offset-2">
-      <div class="relative flex gap-4" style="min-width:max-content">
-        <div class="absolute left-[130px] right-[130px] top-[21px] h-[3px] rounded-full bg-[#C0CBE0] z-0"></div>
-        {steps.map((s, i) => (
-          <div data-reveal class="relative z-[1] flex-none w-[260px] flex flex-col items-center">
-            <span
-              class="grid place-items-center w-11 h-11 rounded-full text-[15px] font-bold text-white ring-[5px] ring-white"
-              style={{ background: s.badge }}
-            >{s.n}</span>
-            <span class="w-[3px] h-3 bg-[#C0CBE0]"></span>
-            <div
-              class="w-full rounded-[14px] p-[clamp(18px,2vw,24px)] flex flex-col gap-3"
-              style={{ background: s.bg }}
-            >
-              <span class="text-[10px] font-extrabold tracking-[2px] uppercase" style={{ color: s.tagColor }}>{s.tag}</span>
-              <h3 class="m-0 text-[clamp(19px,1.8vw,23px)] font-bold tracking-[-.6px]" style={{ color: s.dark ? '#fff' : '#0C1630' }}>{s.title}</h3>
-              <p class="m-0 text-[14.5px] leading-[1.6]" style={{ color: s.dark ? 'rgba(255,255,255,.78)' : '#4A5568' }}>{s.desc}</p>
+    <ol class="mt-[clamp(32px,3.6vw,48px)] relative grid gap-0">
+      <div class="absolute left-5 sm:left-7 top-2 bottom-2 w-px bg-ink/[.09]" aria-hidden="true"></div>
+      {pasos.map((p) => (
+        <li data-reveal class="relative pl-[52px] sm:pl-[76px] pb-[clamp(30px,3.4vw,44px)] last:pb-0">
+          <span class="absolute left-0 top-0 grid place-items-center w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-brand-blue text-white text-[15px] sm:text-[18px] font-extrabold ring-4 ring-white z-10">{p.n}</span>
+          <div class="pt-1 sm:pt-3">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <h3 class="m-0 text-[18px] sm:text-[20px] font-bold text-ink">{p.titulo}</h3>
+              <span class="text-[11px] font-bold uppercase tracking-[1px] text-brand-blue bg-brand-blue/[.08] px-2.5 py-[3px] rounded-full whitespace-nowrap">{p.plazo}</span>
             </div>
-            {i < steps.length - 1 && (
-              <span class="absolute top-[17px] left-[calc(100%+4px)] w-0 h-0 border-y-[5px] border-y-transparent border-l-[8px] border-l-[#93A5C8]"></span>
-            )}
+            <p class="mt-2 m-0 max-w-[62ch] text-[14.5px] sm:text-[15px] leading-[1.65] text-[#4A5568]">{p.texto}</p>
           </div>
-        ))}
-      </div>
-    </div>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>

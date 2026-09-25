@@ -1,20 +1,15 @@
 ---
-const extras = [
-  { num: '-35/50', unit: '%', accent: '#7FB0F5', title: 'Rotación Crítica', sub: 'verificable · 90 días' },
-  { num: '+20', unit: '%', accent: '#B39DEB', title: 'Productividad del equipo', sub: 'kpi auditado · mes 3' },
-  { num: '15', unit: 'hs', accent: '#EE8FD2', title: 'Liberadas en gestión directiva', sub: 'por semana · en promedio' },
-  { num: 'D', unit: '1', accent: '#7FB0F5', title: 'ROI verificable', sub: 'desde el primer día de intervención' }
+const stats = [
+  { count: '-35/50', suffix: '%', label: 'de rotación crítica, documentada' },
+  { count: '+20', suffix: '%', label: 'de productividad, medida con KPIs auditables' },
+  { count: '15', suffix: ' hs', label: 'directivas liberadas por semana' },
+  { count: null, display: 'ISO 30414', label: 'informe final auditable por un tercero' }
 ];
-const mobileMetrics = [
-  { num: '-45', unit: '%', accent: '#7FB0F5', title: 'Menos rotación crítica', sub: 'Reducción promedio en los primeros 6 meses' },
-  { num: '+28', unit: '%', accent: '#B39DEB', title: 'Más productividad directiva', sub: 'Incremento documentado' },
-  { num: '6', unit: '×', accent: '#EE8FD2', title: 'Retorno de inversión', sub: 'Promedio en la primera contratación crítica acompañada' },
-  ...extras
-];
+const statFootnote = 'Resultado comprometido en el Programa Estructura Express (12 semanas)';
 ---
 <section
   id="inicio"
-  class="relative min-h-[100svh] flex flex-col pt-[clamp(88px,13svh,148px)] px-4 sm:px-8 lg:px-16 pb-[clamp(26px,4.5svh,44px)] bg-[#0C1630] overflow-hidden isolate"
+  class="relative min-h-[100svh] flex flex-col pt-[clamp(88px,13svh,148px)] px-4 sm:px-8 lg:px-16 pb-[clamp(26px,4.5svh,44px)] bg-ink overflow-hidden isolate"
 >
   <video
     data-hero-video
@@ -24,146 +19,54 @@ const mobileMetrics = [
     loop
     playsinline
     preload="auto"
-    src="/videos/hr-hero.mp4"
     class="absolute inset-0 w-full h-full object-cover z-[1]"
-  ></video>
+  >
+    <source media="(max-width: 639px)" src="/videos/hr-hero-mobile.mp4" type="video/mp4" />
+    <source src="/videos/hr-hero.mp4" type="video/mp4" />
+  </video>
   <div class="absolute inset-0 z-[2] pointer-events-none bg-[rgba(12,22,48,.42)]"></div>
   <div class="absolute left-0 right-0 bottom-0 h-[62%] z-[3] pointer-events-none bg-[linear-gradient(to_top,rgba(12,22,48,.92)_6%,rgba(12,22,48,0))]"></div>
 
   <div class="hero-copy relative z-10 pointer-events-none flex-1 flex flex-col justify-center w-full max-w-[1200px] mx-auto animate-fadeUp">
-    <h1 class="m-0 max-w-[20ch] text-[clamp(32px,min(4.2vw,6.4svh),56px)] font-bold leading-[1.04] tracking-[-2.4px] text-white [text-wrap:balance]">
-      Talentos que producen.<br />Sistemas que perduran.
+    <p class="m-0 text-[11px] font-bold tracking-[2.5px] uppercase text-white/70">HR Strategy Partners · Salta · NOA · Argentina</p>
+    <h1 class="mt-3 m-0 max-w-[18ch] text-[clamp(32px,min(4.4vw,6.4svh),58px)] font-bold leading-[1.06] tracking-[-2.2px] text-white [text-wrap:balance]">
+      Lo que no estructurás, lo pagás.
     </h1>
-    <p class="mt-[clamp(12px,2svh,20px)] max-w-[46ch] text-[17px] leading-[1.6] text-white/[.86] [text-wrap:pretty]">
-      Dirección estratégica de capital humano para PyMEs en escala. ROI verificable desde el primer día.
+    <p class="mt-[clamp(10px,1.6svh,16px)] text-[19px] font-semibold leading-[1.4] text-white [text-wrap:pretty]">
+      Convertimos estructura en capacidad para crecer.
     </p>
-    <div class="flex flex-wrap gap-3 mt-[clamp(16px,3svh,28px)] pointer-events-auto">
+    <p class="mt-[clamp(10px,1.6svh,16px)] max-w-[52ch] text-[16px] leading-[1.6] text-white/[.8] [text-wrap:pretty]">
+      Una empresa de 50 personas con 30% de rotación anual pierde entre USD 75.000 y USD 150.000 por año que ningún reporte muestra.
+    </p>
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-[clamp(16px,3svh,28px)] pointer-events-auto">
       <a
-        href="#servicios"
-        class="px-[26px] py-[14px] rounded-full bg-[#F06FCB] text-[#0C1630] font-bold text-[14px] shadow-[0_16px_48px_rgba(240,111,203,.4)] hover:bg-[#EA57BE] hover:-translate-y-0.5 transition"
-        >Ver servicios</a
+        href="#contacto"
+        class="px-[26px] py-[14px] rounded-full bg-[#F06FCB] text-ink font-bold text-[14px] shadow-[0_16px_48px_rgba(240,111,203,.4)] hover:bg-[#EA57BE] hover:-translate-y-0.5 transition"
+        >Reservar diagnóstico de 30 minutos</a
       >
+      <span class="text-[13px] text-white/65">Sin costo. Sin compromiso. Propuesta en 48 horas.</span>
     </div>
   </div>
 
-  <div data-mobile-metrics role="region" aria-roledescription="carrusel" aria-label="Resultados de nuestros programas" class="relative z-10 sm:hidden flex-none w-full max-w-[400px] mx-auto mt-6">
-    <div data-mobile-viewport id="hero-mobile-metrics" aria-live="off" class="grid overflow-hidden rounded-[14px] bg-[#0C1630]/60 border border-white/15 backdrop-blur-md px-4 py-4 touch-pan-y">
-      {mobileMetrics.map((metric, i) => (
-        <div data-mobile-slide data-active={String(i === 0)} aria-hidden={i !== 0} role="group" aria-roledescription="diapositiva" aria-label={`${i + 1} de ${mobileMetrics.length}`} class="mobile-metric-slide">
-          <p class="whitespace-nowrap font-extrabold tracking-[-1px] leading-none" style={{ color: metric.accent }}>
-            <span class={metric.num.length > 4 ? 'text-[26px]' : 'text-[32px]'}>{metric.num}</span><span class="text-[20px]">{metric.unit}</span>
-          </p>
-          <div class="min-w-0">
-            <p class="text-[14px] leading-[1.4] font-semibold text-white">{metric.title}</p>
-            <p class="mt-1 text-[12px] leading-[1.5] text-white/75">{metric.sub}</p>
+  <div class="relative z-10 flex-none w-full max-w-[1020px] mx-auto mt-[clamp(20px,3svh,36px)] grid grid-cols-2 sm:grid-cols-4 gap-[clamp(10px,1.4vw,16px)]">
+    {stats.map((stat) => (
+      <div class="relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        {stat.count ? (
+          <div class="flex items-baseline gap-0.5">
+            <span class="text-[clamp(22px,min(2.8vw,4.2svh),34px)] font-extrabold leading-none tracking-[-1.6px] text-white">{stat.count}</span>
+            <span class="text-[16px] font-extrabold leading-none text-white">{stat.suffix}</span>
           </div>
-        </div>
-      ))}
-    </div>
-    <div data-mobile-controls class="hidden mt-1">
-      <div class="flex items-center justify-center gap-3 text-white/80">
-        <button data-mobile-prev type="button" aria-label="Ver resultado anterior" aria-controls="hero-mobile-metrics" class="grid place-items-center w-11 h-11 rounded-full hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><span aria-hidden="true">←</span></button>
-        <button data-mobile-next type="button" aria-label="Ver resultado siguiente" aria-controls="hero-mobile-metrics" class="grid place-items-center w-11 h-11 rounded-full hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><span aria-hidden="true">→</span></button>
+        ) : (
+          <div class="text-[clamp(19px,min(2.4vw,3.6svh),28px)] font-extrabold leading-none tracking-[-1px] text-white">{stat.display}</div>
+        )}
+        <p class="mt-[clamp(8px,1svh,11px)] text-[12.5px] leading-[1.35] font-semibold text-white/85 [text-wrap:pretty]">{stat.label}</p>
       </div>
-    </div>
+    ))}
   </div>
-
-  <div class="hidden sm:block relative z-10 flex-none w-full max-w-[1020px] mx-auto mt-[clamp(16px,2.6svh,32px)]">
-    <div class="relative max-w-[1020px]">
-    <button
-      data-stats-prev
-      type="button"
-      aria-label="Ver métrica anterior"
-      class="absolute left-2 sm:-left-5 top-[42%] -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-[rgba(12,22,48,.6)] backdrop-blur border border-white/30 text-white hover:bg-[rgba(12,22,48,.85)] transition"
-    >
-      <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-    </button>
-    <button
-      data-stats-next
-      type="button"
-      aria-label="Ver métrica siguiente"
-      class="absolute right-2 sm:-right-5 top-[42%] -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-[rgba(12,22,48,.6)] backdrop-blur border border-white/30 text-white hover:bg-[rgba(12,22,48,.85)] transition"
-    >
-      <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-    </button>
-    <div data-stats-carousel class="flex gap-[clamp(12px,1.4vw,18px)] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-1">
-      <div class="w-full flex-none snap-center sm:w-auto sm:flex-1">
-        <div class="w-[70%] sm:w-full mx-auto relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
-        <div class="flex items-baseline gap-0.5">
-          <span data-count="-45" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">-45</span>
-          <span class="text-[22px] font-extrabold leading-none text-white">%</span>
-        </div>
-        <div class="h-1 rounded-full bg-white/[.22] mt-[clamp(9px,1.1svh,12px)] overflow-hidden">
-          <div data-bar data-bar-from="100" data-bar-to="45" class="w-[45%] h-full rounded-full bg-[#7FB0F5]"></div>
-        </div>
-        <p class="mt-[clamp(9px,1.2svh,12px)] text-[13px] leading-[1.3] font-semibold tracking-[-.2px] text-white [text-wrap:pretty]">Reducción promedio de rotación crítica en primeros 6 meses</p>
-        </div>
-      </div>
-      <div class="w-full flex-none snap-center sm:w-auto sm:flex-1">
-        <div class="w-[70%] sm:w-full mx-auto relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
-        <div class="flex items-baseline gap-0.5">
-          <span data-count="28" data-count-prefix="+" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">+28</span>
-          <span class="text-[22px] font-extrabold leading-none text-white">%</span>
-        </div>
-        <div class="h-1 rounded-full bg-white/[.22] mt-[clamp(9px,1.1svh,12px)] overflow-hidden">
-          <div data-bar data-bar-from="0" data-bar-to="28" class="w-[28%] h-full rounded-full bg-[#B39DEB]"></div>
-        </div>
-        <p class="mt-[clamp(9px,1.2svh,12px)] text-[13px] leading-[1.3] font-semibold tracking-[-.2px] text-white [text-wrap:pretty]">Incremento de productividad directiva documentado</p>
-        </div>
-      </div>
-      <div class="w-full flex-none snap-center sm:w-auto sm:flex-1">
-        <div class="w-[70%] sm:w-full mx-auto relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
-        <div class="flex items-baseline gap-1">
-          <span data-count="6" data-count-from="1" class="text-[clamp(28px,min(3.6vw,5.2svh),42px)] font-extrabold leading-none tracking-[-2.4px] text-white">6</span>
-          <span class="text-[28px] font-extrabold leading-none text-white">×</span>
-        </div>
-        <div class="flex gap-1 mt-[clamp(9px,1.1svh,12px)]">
-          {Array.from({ length: 6 }).map(() => (
-            <span data-seg class="flex-1 h-1 rounded-full bg-[#EE8FD2]"></span>
-          ))}
-        </div>
-        <p class="mt-[clamp(9px,1.2svh,12px)] text-[13px] leading-[1.3] font-semibold tracking-[-.2px] text-white [text-wrap:pretty]">ROI promedio en la primera contratación crítica acompañada</p>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div
-      data-extra-card
-      data-extras={JSON.stringify(extras)}
-      class="mt-[clamp(10px,1.4svh,16px)] max-w-[1020px] flex items-center gap-[clamp(12px,1.6vw,20px)] rounded-full px-[clamp(18px,2.2vw,28px)] py-[clamp(10px,1.2svh,14px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_16px_44px_rgba(0,0,0,.28)]"
-    >
-      <span class="hidden sm:inline flex-none text-[10px] font-bold tracking-[1.6px] uppercase text-white/50">Impacto adicional</span>
-      <span class="flex-none w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse"></span>
-      <div data-extra-fade class="transition-opacity duration-300 flex flex-col gap-0.5 min-w-0 sm:flex-row sm:items-baseline sm:gap-2">
-        <span class="flex items-baseline gap-2 min-w-0"><span class="flex-none whitespace-nowrap"><span data-extra-num class="text-[20px] font-extrabold leading-none tracking-[-1px] text-white">-35/50</span><span data-extra-unit class="text-[15px] font-extrabold leading-none text-white">%</span></span><span data-extra-title class="min-w-0 text-[13.5px] font-semibold text-white">Rotación Crítica</span></span>
-        <span class="hidden sm:inline flex-none text-white/40">·</span>
-        <span data-extra-sub class="text-[11.5px] leading-[1.3] text-white/55 sm:text-[13px]">verificable · 90 días</span>
-      </div>
-      <div class="ml-auto flex-none flex gap-1">
-        {extras.map((_, i) => (
-          <span data-extra-dot class:list={["h-1 rounded-full transition-all", i === 0 ? "w-3.5 bg-white/80" : "w-1 bg-white/25"]}></span>
-        ))}
-      </div>
-    </div>
-  </div>
+  <p class="relative z-10 mt-3 max-w-[1020px] mx-auto w-full text-[11.5px] text-white/45">{statFootnote}</p>
 </section>
 
 <style>
-  .mobile-metric-slide {
-    grid-area: 1 / 1;
-    display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
-    align-items: center;
-    gap: 12px;
-    visibility: hidden;
-    opacity: 0;
-  }
-
-  .mobile-metric-slide[data-active='true'] {
-    visibility: visible;
-    opacity: 1;
-  }
-
   @media (width < 640px) {
     #inicio {
       padding-top: 96px;
@@ -175,27 +78,9 @@ const mobileMetrics = [
     }
 
     .hero-copy h1 {
-      font-size: clamp(30px, 8vw, 38px);
-      line-height: 1.1;
-      letter-spacing: -1.3px;
-    }
-
-    .hero-copy > p {
-      max-width: 34ch;
-      margin-top: 14px;
-      font-size: 15px;
-      line-height: 1.55;
-    }
-
-    .hero-copy a {
-      padding: 12px 22px;
-      box-shadow: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .mobile-metric-slide {
-      transition: none;
+      font-size: clamp(28px, 8vw, 36px);
+      line-height: 1.12;
+      letter-spacing: -1.2px;
     }
   }
 </style>
