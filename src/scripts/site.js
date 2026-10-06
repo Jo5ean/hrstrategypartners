@@ -4,7 +4,7 @@ function initHeader() {
   const BASE_BG = 'bg-[rgba(15,46,107,.45)]';
   const SCROLLED_CLASSES = ['bg-[rgba(15,46,107,.94)]', 'shadow-[0_8px_34px_rgba(12,22,48,.26)]'];
   const onScroll = () => {
-    const scrolled = (window.scrollY || document.documentElement.scrollTop) > 80;
+    const scrolled = header.hasAttribute('data-header-solid') || (window.scrollY || document.documentElement.scrollTop) > 80;
     header.classList.toggle(BASE_BG, !scrolled);
     SCROLLED_CLASSES.forEach((c) => header.classList.toggle(c, scrolled));
   };
@@ -181,6 +181,23 @@ function initBarraReserva() {
   update();
 }
 
+function initProgramaElegido() {
+  const section = document.querySelector('#contacto');
+  const chip = section?.querySelector('[data-programa-elegido]');
+  if (!chip) return;
+  const slug = new URLSearchParams(location.search).get('programa');
+  const hit = JSON.parse(section.dataset.programas || '[]').find(([s]) => s === slug);
+  if (!hit) return;
+  const nombre = hit[1];
+  chip.querySelector('[data-programa-nombre]').textContent = nombre;
+  chip.hidden = false;
+  document.querySelectorAll('a[href^="https://wa.me/"]').forEach((a) => {
+    const u = new URL(a.href);
+    const text = (u.searchParams.get('text') || '').replace(/(minutos|HR Strategy Partners)\.(\s|$)/, `$1. Me interesa: ${nombre}.$2`);
+    a.href = u.origin + u.pathname + '?text=' + encodeURIComponent(text);
+  });
+}
+
 function initPlanFinder() {
   const root = document.querySelector('[data-plan-finder]');
   const wa = document.querySelector('[data-whatsapp]');
@@ -354,6 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhatsApp();
   initStatsCarousel();
   initBarraReserva();
+  initProgramaElegido();
   initPlanFinder();
   initContactDetails();
   initResourceForm();

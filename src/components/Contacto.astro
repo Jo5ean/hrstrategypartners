@@ -1,7 +1,10 @@
 ---
 import OndasFondo from './OndasFondo.astro';
+import { programas } from '../data/programas.js';
+
+const listaProgramas = JSON.stringify(programas.map((p) => [p.slug, p.nombre]));
 ---
-<section id="contacto" data-details-open="false" class="px-4 sm:px-8 lg:px-16 pt-0 pb-[clamp(32px,4vw,56px)]">
+<section id="contacto" data-details-open="false" data-programas={listaProgramas} class="px-4 sm:px-8 lg:px-16 pt-0 pb-[clamp(32px,4vw,56px)]">
   <div class="relative overflow-hidden max-w-[1200px] mx-auto rounded-[24px] p-[clamp(24px,3vw,44px)] grid gap-[clamp(24px,3vw,44px)] items-start" style="background:#0F2E6B;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">
     <OndasFondo />
     <div class="relative z-10">
@@ -33,6 +36,7 @@ import OndasFondo from './OndasFondo.astro';
 
     <div class="bg-white rounded-[20px] p-[clamp(16px,2vw,22px)]">
       <div class="px-2 pt-1 pb-3">
+        <p data-programa-elegido hidden class="mb-3 inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0097B2]/10 text-[13px] font-bold text-ink">Programa elegido: <span data-programa-nombre></span></p>
         <h3 class="m-0 text-[clamp(19px,1.8vw,23px)] font-bold tracking-[-.5px] text-ink">Elegí un horario</h3>
         <p class="mt-2 text-[15px] leading-[1.6] text-[#5C6B8A]">Por Google Meet. Confirmación por email.</p>
       </div>
