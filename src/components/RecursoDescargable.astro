@@ -41,6 +41,11 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz-JkmRWOzgSasc
             <input type="tel" name="telefono" inputmode="tel" autocomplete="tel" placeholder="+54 9 387 000 0000" class="min-w-0 w-full px-3.5 py-[10px] rounded-[8px] border-0 bg-[#F3F2FA] text-[14px] text-ink" />
             <span data-field-error="telefono" class="hidden text-[11.5px] font-semibold text-[#B33A99]"></span>
           </label>
+          <label class="sm:col-span-3 flex items-start gap-2.5 text-[12.5px] leading-[1.5] text-[#4A5568]">
+            <input type="checkbox" required name="consentimiento" class="mt-0.5 w-5 h-5 flex-none accent-brand-blue" />
+            <span>Acepto que mis datos se usen para enviarme este recurso. Leí el <a href="/privacidad" target="_blank" rel="noopener" class="font-semibold text-brand-blue underline underline-offset-2">aviso de privacidad</a>.</span>
+          </label>
+          <span data-field-error="consentimiento" class="hidden sm:col-span-3 text-[12px] font-semibold text-[#B33A99]"></span>
           <button
             type="submit"
             disabled

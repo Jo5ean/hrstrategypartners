@@ -7,6 +7,9 @@ export interface Props {
   ogTitle?: string;
 }
 
+// Pasar a false al publicar en el dominio final.
+const esBorrador = true;
+
 const {
   title = 'HR Strategy Partners · Arquitectura organizacional para empresas en crecimiento · NOA',
   description = 'Lo que no estructurás, lo pagás. Convertimos estructura en capacidad para crecer. Diagnóstico de 30 minutos, sin costo. Salta · NOA · Argentina.',
@@ -20,7 +23,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={esBorrador ? 'noindex, nofollow' : 'index, follow'} />
     <meta name="theme-color" content="#0C1630" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="https://hrstrategypartners.com.ar/" />

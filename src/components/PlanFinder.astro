@@ -1,37 +1,24 @@
 ---
+const opciones = [
+  'Rotación que no cierra',
+  'Productividad baja',
+  'Vacantes críticas sin cubrir',
+  'Conflictos o clima deteriorado',
+  'Crecimiento sin estructura',
+  'Otro'
+];
 ---
-<div data-reveal class="mt-[clamp(20px,2.4vw,30px)] bg-white rounded-[20px] ring-1 ring-[#F06FCB]/25 shadow-[0_2px_6px_rgba(12,22,48,.08),0_24px_70px_rgba(200,79,174,.35)] overflow-hidden">
-  <div class="flex items-center gap-3 px-6 py-4 border-b border-[#E1E4EC]">
-    <span class="brand-sym grid place-items-center w-11 h-11 rounded-full text-white text-[13px] font-extrabold flex-none">HR</span>
-    <div class="min-w-0">
-      <p class="m-0 text-[16px] font-extrabold tracking-[-.2px] text-ink">¿No sabés cuál programa es para vos?</p>
-      <p class="m-0 text-[12.5px] text-[#5C6B8A]">Asistente HR · respuesta inmediata</p>
+<div data-reveal data-plan-finder class="mt-[clamp(20px,2.4vw,30px)] bg-white rounded-[20px] border border-ink/[.08] shadow-card p-[clamp(22px,2.6vw,36px)]">
+  <h2 id="plan-titulo" class="m-0 text-[clamp(21px,2vw,26px)] font-extrabold tracking-[-.6px] text-ink">¿Qué te cuesta más hoy?</h2>
+  <fieldset aria-labelledby="plan-titulo" class="mt-5 m-0 p-0 border-0 min-w-0">
+    <div class="flex flex-wrap gap-2.5">
+      {opciones.map((opcion) => (
+        <label class="cursor-pointer min-h-11 inline-flex items-center px-5 rounded-full border border-ink/15 text-[14.5px] font-semibold text-ink transition hover:border-brand-blue has-[:checked]:bg-brand-blue has-[:checked]:border-brand-blue has-[:checked]:text-white has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-blue has-[:focus-visible]:ring-offset-2">
+          <input type="radio" name="que-te-cuesta" value={opcion} class="sr-only" />
+          {opcion}
+        </label>
+      ))}
     </div>
-    <span class="ml-auto flex-none flex items-center gap-1.5 text-[12px] font-bold text-[#098375]"><span class="w-2 h-2 rounded-full bg-[#128C7E] animate-pulse"></span>En línea</span>
-  </div>
-
-  <div data-plan-thread class="px-5 sm:px-6 py-5 flex flex-col gap-3 bg-[#F8F7FC] min-h-[160px] max-h-[420px] overflow-y-auto">
-    <div class="self-start max-w-[75%] px-5 py-3.5 rounded-[18px] rounded-bl-[6px] bg-white border border-[#E1E4EC] text-[15px] leading-[1.55] text-ink">
-      Hola, soy el asistente de HR Strategy Partners. Contame brevemente qué está pasando en tu empresa y te recomiendo el programa adecuado.
-    </div>
-  </div>
-
-  <div class="px-5 sm:px-6 py-4 border-t border-[#E1E4EC]">
-    <div class="flex items-center gap-2 bg-[#F8F7FC] rounded-full pl-6 pr-1.5 py-1.5 border border-[#E1E4EC]">
-      <input
-        data-plan-input
-        type="text"
-        placeholder="Escribí tu situación…"
-        class="flex-1 min-w-0 border-0 outline-none bg-transparent text-[15px] text-ink"
-      />
-      <button
-        data-plan-submit
-        type="button"
-        aria-label="Enviar"
-        class="flex-none grid place-items-center w-[44px] h-[44px] rounded-full bg-brand-blue text-white hover:bg-[#153E7E] transition"
-      >
-        <svg viewBox="0 0 24 24" class="w-[18px] h-[18px] fill-current" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-      </button>
-    </div>
-  </div>
+  </fieldset>
+  <a href="#contacto" class="mt-6 inline-flex items-center px-7 py-[14px] rounded-full bg-brand-blue text-white text-[13.5px] font-bold hover:bg-[#153E7E] transition">Reservar diagnóstico de 30 minutos</a>
 </div>
