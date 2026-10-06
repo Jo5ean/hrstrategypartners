@@ -33,7 +33,7 @@ function initMenu() {
   toggle.addEventListener('click', () => setState(!open));
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setState(false)));
   addEventListener('resize', () => {
-    if (innerWidth >= 1024 && open) setState(false);
+    if (innerWidth >= 1280 && open) setState(false);
   });
   addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && open) setState(false);
@@ -112,6 +112,30 @@ function initWhatsApp() {
   };
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+}
+
+function initBarraReserva() {
+  const bar = document.querySelector('[data-reserva-bar]');
+  if (!bar) return;
+  const link = bar.querySelector('a');
+  const contacto = document.querySelector('#contacto');
+  let enContacto = false;
+  const update = () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    const show = y > innerHeight * 0.65 && !enContacto;
+    bar.classList.toggle('translate-y-full', !show);
+    bar.classList.toggle('pointer-events-none', !show);
+    bar.setAttribute('aria-hidden', String(!show));
+    link.tabIndex = show ? 0 : -1;
+  };
+  if (contacto && typeof IntersectionObserver !== 'undefined') {
+    new IntersectionObserver(([entry]) => {
+      enContacto = entry.isIntersecting;
+      update();
+    }, { threshold: 0.15 }).observe(contacto);
+  }
+  addEventListener('scroll', update, { passive: true });
+  update();
 }
 
 function initPlanFinder() {
@@ -285,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroVideo();
   initReveal();
   initWhatsApp();
+  initBarraReserva();
   initPlanFinder();
   initContactDetails();
   initResourceForm();

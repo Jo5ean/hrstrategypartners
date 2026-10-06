@@ -13,13 +13,13 @@ const links = [
 >
   <div class="w-full max-w-[1200px] mx-auto flex items-center justify-between gap-2 sm:gap-6">
     <a href="#inicio" class="flex items-center gap-3 text-white flex-none hover:opacity-80 transition">
-      <span aria-hidden="true" class="brand-sym grid place-items-center w-[38px] h-[38px] rounded-full text-white font-extrabold text-[11px] tracking-[-.5px] ring-2 ring-white/15 flex-none">HR</span>
-      <strong class="text-[10px] sm:text-[11px] font-extrabold tracking-[1px] sm:tracking-[2px] uppercase whitespace-nowrap">HR Strategy Partners</strong>
+      <span aria-hidden="true" class="brand-sym grid place-items-center w-[38px] h-[38px] rounded-full text-white font-extrabold text-[12px] tracking-[-.5px] ring-2 ring-white/15 flex-none">HR</span>
+      <strong class="text-[12px] sm:text-[12px] font-extrabold tracking-[1px] sm:tracking-[2px] uppercase whitespace-nowrap">HR Strategy Partners</strong>
       <span class="sr-only">— inicio</span>
     </a>
-    <nav class="hidden lg:flex items-center gap-0.5 lg:gap-2 justify-end">
+    <nav class="hidden xl:flex items-center gap-0.5 xl:gap-2 justify-end">
       {links.map((link) => (
-        <a href={link.href} class="px-2.5 py-2 rounded-full text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/[.16] transition">{link.label}</a>
+        <a href={link.href} class="px-2.5 py-2 rounded-full whitespace-nowrap text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/[.16] transition">{link.label}</a>
       ))}
       <a
         href="#contacto"
@@ -35,7 +35,7 @@ const links = [
       aria-label="Abrir menú"
       aria-expanded="false"
       aria-controls="menu-movil"
-      class="lg:hidden flex-none grid place-items-center w-11 h-11 rounded-full text-white hover:bg-white/[.16] transition"
+      class="xl:hidden flex-none grid place-items-center w-11 h-11 rounded-full text-white hover:bg-white/[.16] transition"
     >
       <svg data-icon-open viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       <svg data-icon-close viewBox="0 0 24 24" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -44,7 +44,7 @@ const links = [
   <nav
     data-mobile-menu
     id="menu-movil"
-    class="hidden max-h-[calc(100svh-100px)] overflow-y-auto lg:!hidden mt-3 mx-auto w-full max-w-[1200px] rounded-[14px] bg-[rgba(15,46,107,.97)] backdrop-blur-xl border border-white/10 p-3 flex-col gap-1"
+    class="hidden max-h-[calc(100svh-100px)] overflow-y-auto xl:!hidden mt-3 mx-auto w-full max-w-[1200px] rounded-[14px] bg-[rgba(15,46,107,.97)] backdrop-blur-xl border border-white/10 p-3 flex-col gap-1"
     aria-label="Menú móvil"
   >
     {links.map((link) => (
