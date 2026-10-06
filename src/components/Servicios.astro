@@ -4,9 +4,9 @@ import IconoPrograma from './IconoPrograma.astro';
 import { programas } from '../data/programas.js';
 
 const estilos = [
-  { acento: '#1B4E9F', oscuro: false },
-  { acento: '#7B5CC4', oscuro: false },
-  { acento: '#FFFFFF', oscuro: true }
+  { texto: '#2150B7', boton: '#2150B7', botonTexto: '#F8F7FC', oscuro: false },
+  { texto: '#755FAF', boton: '#9877DA', botonTexto: '#0C1630', oscuro: false },
+  { texto: '#F8F7FC', boton: '#F8F7FC', botonTexto: '#0C1630', oscuro: true }
 ];
 const ultimo = programas.length - 1;
 ---
@@ -18,19 +18,19 @@ const ultimo = programas.length - 1;
 
     <ol class="mt-[clamp(28px,3.2vw,44px)] m-0 p-0 list-none grid gap-8 md:gap-6 md:grid-cols-3">
       {programas.map((programa, i) => {
-        const { acento, oscuro } = estilos[i];
+        const { texto, boton, botonTexto, oscuro } = estilos[i];
         return (
           <li class="relative pl-14 md:pl-0 md:flex md:flex-col">
             <span class="absolute left-0 top-0 md:static md:self-center md:mb-4 grid place-items-center flex-none w-10 h-10 rounded-full bg-brand-blue text-white text-[16px] font-extrabold">{programa.numero}</span>
             {i < ultimo && (
               <span aria-hidden="true" class="absolute left-5 top-12 -bottom-8 w-px bg-[#0097B2]/45 md:left-[calc(50%_+_20px)] md:right-[calc(-50%_-_4px)] md:top-5 md:bottom-auto md:h-px md:w-auto"></span>
             )}
-            <article data-reveal class:list={['relative overflow-hidden md:flex-1 flex flex-col rounded-[20px] p-[clamp(22px,2.4vw,30px)]', oscuro ? 'bg-[#0F2E6B] text-white' : 'bg-white border border-ink/[.08] text-ink']}>
+            <article data-reveal class:list={['relative overflow-hidden md:flex-1 flex flex-col rounded-[20px] p-[clamp(22px,2.4vw,30px)]', oscuro ? 'bg-[#0F2E6B] text-white' : 'bg-white border border-ink/[.08] text-ink shadow-card']}>
               {oscuro && <OndasFondo />}
               <div class="relative z-10 flex flex-col flex-1">
                 <div class="flex items-center gap-3">
                   <IconoPrograma numero={programa.numero} class="w-7 h-7 flex-none text-[#0097B2]" />
-                  <p class="m-0 text-[12px] font-extrabold tracking-[2px] uppercase" style={`color:${acento}`}>{programa.nivel}</p>
+                  <p class="m-0 text-[12px] font-extrabold tracking-[2px] uppercase" style={`color:${texto}`}>{programa.nivel}</p>
                 </div>
                 <h3 class="mt-3 m-0 text-[clamp(21px,2vw,24px)] font-extrabold tracking-[-.5px] leading-[1.15]">{programa.nombre}</h3>
                 <p class:list={['mt-1.5 text-[14.5px] italic leading-[1.5]', oscuro ? 'text-white/90' : 'text-[#5C6B8A]']}>{programa.subtitulo}</p>
@@ -42,7 +42,7 @@ const ultimo = programas.length - 1;
                 <p class:list={['mt-1 mb-0 text-[15px] leading-[1.55]', oscuro ? 'text-white/95' : 'text-[#4A5568]']}>{programa.gana}</p>
 
                 <div class="mt-auto pt-6">
-                  <a href={`/programas/${programa.slug}`} class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13.5px] font-bold transition hover:opacity-90" style={`background:${acento};color:${oscuro ? '#0C1630' : '#FFFFFF'}`}>
+                  <a href={`/programas/${programa.slug}`} class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13.5px] font-bold transition hover:opacity-90" style={`background:${boton};color:${botonTexto}`}>
                     Ver el programa
                     <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                   </a>
