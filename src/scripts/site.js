@@ -114,6 +114,49 @@ function initWhatsApp() {
   onScroll();
 }
 
+function initStatsCarousel() {
+  const track = document.querySelector('[data-stats-carousel]');
+  const dots = Array.from(document.querySelectorAll('[data-stats-dots] button'));
+  if (!track || !dots.length) return;
+  const cards = Array.from(track.children);
+  const mobile = matchMedia('(max-width: 639px)');
+  let active = 0;
+  let timer = null;
+
+  const mark = (i) => {
+    active = i;
+    dots.forEach((d, n) => d.setAttribute('aria-current', String(n === i)));
+  };
+  const goTo = (i) => track.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+  const stop = () => {
+    clearInterval(timer);
+    timer = null;
+  };
+  const start = () => {
+    if (timer || !mobile.matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(() => {
+      if (document.hidden || (window.scrollY || 0) > innerHeight * 0.5) return;
+      goTo((active + 1) % cards.length);
+    }, 4500);
+  };
+
+  track.addEventListener('scroll', () => {
+    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    const step = cards[1].offsetLeft - cards[0].offsetLeft;
+    mark(atEnd ? cards.length - 1 : Math.min(cards.length - 1, Math.round(track.scrollLeft / step)));
+  }, { passive: true });
+  ['pointerdown', 'touchstart', 'wheel', 'keydown', 'focusin'].forEach((ev) => track.addEventListener(ev, stop, { passive: true }));
+  dots.forEach((d, i) => d.addEventListener('click', () => { stop(); goTo(i); }));
+  mobile.addEventListener('change', (e) => {
+    if (e.matches) start();
+    else {
+      stop();
+      track.scrollTo({ left: 0 });
+    }
+  });
+  start();
+}
+
 function initBarraReserva() {
   const bar = document.querySelector('[data-reserva-bar]');
   if (!bar) return;
@@ -309,6 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroVideo();
   initReveal();
   initWhatsApp();
+  initStatsCarousel();
   initBarraReserva();
   initPlanFinder();
   initContactDetails();

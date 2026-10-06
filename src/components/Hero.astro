@@ -29,14 +29,14 @@ const statFootnote = 'Resultado comprometido en el Programa Estructura Express (
   <div class="absolute left-0 right-0 bottom-0 h-[62%] z-[3] pointer-events-none bg-[linear-gradient(to_top,rgba(12,22,48,.92)_6%,rgba(12,22,48,0))]"></div>
 
   <div class="hero-copy relative z-10 pointer-events-none flex-1 flex flex-col justify-center w-full max-w-[1200px] mx-auto animate-fadeUp">
-    <p class="m-0 text-[12px] font-bold tracking-[2.5px] uppercase text-white/70">HR Strategy Partners · Salta · NOA · Argentina</p>
+    <p class="hidden sm:block m-0 text-[12px] font-bold tracking-[2.5px] uppercase text-white/70">HR Strategy Partners · Salta · NOA · Argentina</p>
     <h1 class="mt-3 m-0 max-w-[18ch] text-[clamp(32px,min(4.4vw,6.4svh),58px)] font-bold leading-[1.06] tracking-[-.5px] text-white [text-wrap:balance]">
       Lo que no estructurás, lo pagás.
     </h1>
     <p class="mt-[clamp(10px,1.6svh,16px)] text-[19px] font-semibold leading-[1.4] text-white [text-wrap:pretty]">
       Convertimos estructura en capacidad para crecer.
     </p>
-    <p class="mt-[clamp(10px,1.6svh,16px)] max-w-[52ch] text-[16px] leading-[1.6] text-white/[.8] [text-wrap:pretty]">
+    <p class="hidden sm:block mt-[clamp(10px,1.6svh,16px)] max-w-[52ch] text-[16px] leading-[1.6] text-white/[.8] [text-wrap:pretty]">
       Que tu empresa crezca sin que todo dependa de vos.
     </p>
     <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-[clamp(16px,3svh,28px)] pointer-events-auto">
@@ -49,22 +49,38 @@ const statFootnote = 'Resultado comprometido en el Programa Estructura Express (
     </div>
   </div>
 
-  <div class="relative z-10 flex-none w-full max-w-[1020px] mx-auto mt-[clamp(20px,3svh,36px)] grid grid-cols-2 sm:grid-cols-4 gap-[clamp(10px,1.4vw,16px)]">
-    {stats.map((stat) => (
-      <div class="relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
-        {stat.count ? (
-          <div class="flex items-baseline gap-0.5">
-            <span class="text-[clamp(22px,min(2.8vw,4.2svh),34px)] font-extrabold leading-none tracking-[-.5px] text-white">{stat.count}</span>
-            <span class="text-[16px] font-extrabold leading-none text-white">{stat.suffix}</span>
-          </div>
-        ) : (
-          <div class="text-[clamp(19px,min(2.4vw,3.6svh),28px)] font-extrabold leading-none tracking-[-.5px] text-white">{stat.display}</div>
-        )}
-        <p class="mt-[clamp(8px,1svh,11px)] text-[12.5px] leading-[1.35] font-semibold text-white/85 [text-wrap:pretty]">{stat.label}</p>
-      </div>
-    ))}
+  <div class="relative z-10 flex-none w-full max-w-[1020px] mx-auto mt-[clamp(20px,3svh,36px)]">
+    <div
+      data-stats-carousel
+      role="region"
+      aria-roledescription="carrusel"
+      aria-label="Resultados comprometidos"
+      tabindex="0"
+      class="no-scrollbar flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth sm:grid sm:grid-cols-4 sm:gap-[clamp(10px,1.4vw,16px)] sm:overflow-visible sm:snap-none"
+    >
+      {stats.map((stat) => (
+        <div class="relative flex-none w-[76%] snap-start sm:w-auto rounded-[14px] p-[clamp(14px,1.4vw,18px)] max-sm:p-5 bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+          {stat.count ? (
+            <div class="flex items-baseline gap-0.5">
+              <span class="text-[clamp(22px,min(2.8vw,4.2svh),34px)] max-sm:text-[40px] font-extrabold leading-none tracking-[-.5px] text-white">{stat.count}</span>
+              <span class="text-[16px] max-sm:text-[20px] font-extrabold leading-none text-white">{stat.suffix}</span>
+            </div>
+          ) : (
+            <div class="text-[clamp(19px,min(2.4vw,3.6svh),28px)] max-sm:text-[32px] font-extrabold leading-none tracking-[-.5px] text-white">{stat.display}</div>
+          )}
+          <p class="mt-[clamp(8px,1svh,11px)] max-sm:mt-3 text-[12.5px] max-sm:text-[15px] leading-[1.35] font-semibold text-white/85 [text-wrap:pretty]">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+    <div data-stats-dots class="sm:hidden flex justify-center gap-1 mt-2">
+      {stats.map((_, i) => (
+        <button type="button" aria-label={`Ver resultado ${i + 1} de ${stats.length}`} aria-current={i === 0 ? "true" : "false"} class="group grid place-items-center w-6 h-6">
+          <span class="block w-2 h-2 rounded-full bg-white/40 transition-all duration-300 group-aria-[current=true]:w-5 group-aria-[current=true]:bg-white"></span>
+        </button>
+      ))}
+    </div>
   </div>
-  <p class="relative z-10 mt-3 max-w-[1020px] mx-auto w-full text-[12px] text-white/70">{statFootnote}</p>
+  <p class="relative z-10 mt-3 max-w-[1020px] mx-auto w-full text-[12px] text-white/70 max-sm:text-center">{statFootnote}</p>
 </section>
 
 <style>
@@ -81,7 +97,7 @@ const statFootnote = 'Resultado comprometido en el Programa Estructura Express (
     .hero-copy h1 {
       font-size: clamp(28px, 8vw, 36px);
       line-height: 1.12;
-      letter-spacing: -1.2px;
+      letter-spacing: -.5px;
     }
   }
 </style>
