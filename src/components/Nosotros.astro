@@ -1,39 +1,54 @@
 ---
+const redes = [
+  { href: 'https://www.linkedin.com/in/carolinanavamuel/', etiqueta: 'LinkedIn de Carolina', icono: 'linkedin' },
+  { href: 'https://www.linkedin.com/company/hr-strategy-partners/posts/?feedView=all', etiqueta: 'LinkedIn de la firma', icono: 'linkedin' },
+  { href: 'https://www.instagram.com/hrstrategypartners/', etiqueta: 'Instagram de la firma', icono: 'instagram' }
+];
 ---
 <section id="quien-dirige" class="bg-[#F8F7FC] px-4 sm:px-8 lg:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
   <div class="max-w-[1200px] mx-auto">
-    <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Quién dirige</p>
+    <p class="mb-3.5 text-[12px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Quién dirige</p>
 
     <div data-reveal class="grid gap-[clamp(20px,2.6vw,36px)] mt-[clamp(22px,2.6vw,34px)] items-stretch" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
-      <div class="relative rounded-[22px] overflow-hidden bg-[#EFECFB] min-h-[clamp(280px,28vw,380px)]">
+      <div class="relative rounded-[22px] overflow-hidden bg-[#0F2E6B] min-h-[clamp(320px,34vw,520px)]">
         <img
           src="/images/carolina-navamuel.webp"
           alt="Carolina Navamuel, Fundadora y CEO de HR Strategy Partners"
-          class="absolute inset-0 w-full h-full object-cover block"
+          class="absolute inset-0 w-full h-full object-cover block saturate-[.85]"
           style="object-position:50% 22%"
         />
+        <div class="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-60" style="background:#0F2E6B" aria-hidden="true"></div>
+        <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0C1630]/40 to-transparent" aria-hidden="true"></div>
       </div>
       <div class="bg-white rounded-[22px] p-[clamp(22px,2.4vw,34px)] shadow-card">
-        <h2 class="m-0 text-[clamp(26px,2.6vw,36px)] font-bold tracking-[-1.2px] leading-[1.1] text-ink">Mgtr. Carolina Navamuel</h2>
+        <h2 class="m-0 text-[clamp(26px,2.6vw,36px)] font-bold tracking-[-.5px] leading-[1.1] text-ink">Mgtr. Carolina Navamuel</h2>
         <p class="mt-2 text-[15px] leading-[1.6] font-semibold text-brand-blue">Fundadora & CEO</p>
 
-        <p class="mt-[22px] text-[16px] leading-[1.7] text-ink font-medium [text-wrap:pretty]">
-          Más de 15 años ayudando a empresas a crecer sin que todo dependa de las mismas personas.
-        </p>
-        <p class="mt-3 text-[16px] leading-[1.7] text-[#4A5568] [text-wrap:pretty]">
-          Desde Salta, trabaja con empresas de infraestructura, manufactura y servicios profesionales.
-        </p>
+        <div class="mt-5 grid gap-3.5 text-[15.5px] leading-[1.7] text-[#4A5568] [text-wrap:pretty]">
+          <p class="m-0">Carolina Navamuel es CEO de HR Strategy Partners, firma desde la que aporta su experiencia en arquitectura y evolución organizacional a empresas de infraestructura, manufactura y servicios profesionales que enfrentan los desafíos estructurales propios del crecimiento: decisiones que se concentran, responsabilidades que se superponen y operaciones que dependen demasiado de determinadas personas.</p>
+          <p class="m-0">Durante más de 15 años trabajó en industrias donde una mala decisión estructural tiene un costo concreto: minería, petróleo y construcción.</p>
+          <p class="m-0">Es Magíster en Project Management, con especialización en Arquitectura Organizacional. Cuenta con certificaciones internacionales emitidas por EGCI (Escuela de Gerencia, Valencia), Grupo Doctrina Qualitas y Sabal University, y un Máster en Transformación Digital.</p>
+        </div>
 
-        <dl class="mt-[26px] grid gap-3 text-[14.5px]">
-          <div class="flex gap-2 flex-wrap">
-            <dt class="font-bold text-[#5C6B8A]">Cobertura:</dt>
-            <dd class="m-0 text-[#4A5568]">NOA · Argentina · Remoto LATAM.</dd>
-          </div>
-          <div class="flex gap-2 flex-wrap">
-            <dt class="font-bold text-[#5C6B8A]">Método:</dt>
-            <dd class="m-0 text-[#4A5568]">PMBOK · ISO 30414 · Topgrading.</dd>
-          </div>
-        </dl>
+        <p class="mt-5 mb-0 text-[13px] font-bold text-[#5C6B8A]">Su trabajo parte de una premisa:</p>
+        <blockquote class="mt-2 mb-0 pl-4 border-l-[3px] border-[#0097B2] text-[17px] italic font-medium leading-[1.55] text-ink">Una empresa no puede crecer de manera sostenible si su funcionamiento depende permanentemente de quienes la sostienen.</blockquote>
+
+        <p class="mt-5 mb-0 text-[15.5px] leading-[1.7] text-[#4A5568] [text-wrap:pretty]">Desde Salta, lidera proyectos de arquitectura y evolución organizacional con una metodología que combina Project Management, ISO 30414 y Topgrading, llevando cada intervención desde el diagnóstico hasta la implementación y la transferencia al equipo.</p>
+
+        <ul class="mt-6 m-0 p-0 list-none flex flex-wrap gap-2.5">
+          {redes.map((red) => (
+            <li>
+              <a href={red.href} target="_blank" rel="noopener" class="inline-flex items-center gap-2 min-h-11 px-4 rounded-full border border-ink/15 text-[13.5px] font-semibold text-ink hover:border-brand-blue hover:text-brand-blue transition">
+                {red.icono === 'linkedin' ? (
+                  <svg viewBox="0 0 24 24" class="w-[18px] h-[18px] flex-none" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" class="w-[18px] h-[18px] flex-none" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r=".6" fill="currentColor" /></svg>
+                )}
+                {red.etiqueta}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </div>

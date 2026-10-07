@@ -3,12 +3,13 @@
 @theme {
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
   --color-ink: #0C1630;
-  --color-brand-blue: #1B4E9F;
+  --color-brand-blue: #2150B7;
   --color-brand-blue-d: #0F2E6B;
   --color-brand-blue-l: #3468C0;
-  --color-brand-violet: #7B5CC4;
-  --color-brand-magenta: #C84FAE;
-  --color-brand-teal: #2B8698;
+  --color-brand-violet: #9877DA;
+  --color-brand-magenta: #C07CE4;
+  --color-brand-teal: #0097B2;
+  --color-white: #F8F7FC;
   --color-brand-teal-l: #41A8BC;
   --shadow-card: 0 1px 3px rgba(12,22,48,.06), 0 12px 40px rgba(12,22,48,.06);
   --animate-fadeUp: fadeUp .8s cubic-bezier(0,0,.2,1) both;
@@ -27,11 +28,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 a { transition: all .3s cubic-bezier(.4,0,.2,1); }
 input:focus, select:focus, textarea:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(27,78,159,.16);
+  box-shadow: 0 0 0 3px rgba(33,80,183,.16);
 }
 
 .brand-sym {
-  background: linear-gradient(135deg, #1B4E9F 0%, #7B5CC4 55%, #C84FAE 100%);
+  background: linear-gradient(135deg, #2150B7 0%, #9877DA 55%, #C07CE4 100%);
 }
 
 .no-scrollbar {

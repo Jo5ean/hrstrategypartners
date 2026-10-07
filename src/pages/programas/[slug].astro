@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import OndasFondo from '../../components/OndasFondo.astro';
+import IconoPrograma from '../../components/IconoPrograma.astro';
+import { programas } from '../../data/programas.js';
+
+export function getStaticPaths() {
+  return programas.map((programa) => ({ params: { slug: programa.slug }, props: { programa } }));
+}
+
+const { programa } = Astro.props;
+const titulo = programa.tituloPagina ?? programa.nombre;
+const otros = programas.filter((p) => p.slug !== programa.slug);
+---
+<Layout title={`${titulo} · HR Strategy Partners`} description={programa.descripcion} path={`/programas/${programa.slug}`}>
+  <div class="font-sans text-[#0C1630] bg-[#F8F7FC] overflow-x-hidden">
+    <Header solido />
+    <main id="contenido" class="px-4 sm:px-8 lg:px-16 pt-[clamp(110px,12vw,140px)] pb-[clamp(40px,5vw,72px)]">
+      <div class="max-w-[960px] mx-auto">
+        <a href="/#niveles" class="inline-flex items-center gap-2 min-h-11 text-[14px] font-semibold text-brand-blue hover:underline">
+          <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+          Todos los programas
+        </a>
+
+        <div class="mt-4 flex items-center gap-3">
+          <IconoPrograma numero={programa.numero} class="w-8 h-8 flex-none text-[#0097B2]" />
+          <p class="m-0 text-[12px] font-extrabold tracking-[2px] uppercase text-brand-blue">Programa {programa.numero} · {programa.nivel}</p>
+        </div>
+        <h1 class="mt-3 m-0 text-[clamp(30px,4vw,46px)] font-extrabold tracking-[-.5px] leading-[1.08] text-ink">{programa.nombre}</h1>
+        <p class="mt-3 mb-0 max-w-[56ch] text-[18px] italic leading-[1.5] text-[#5C6B8A]">{programa.subtitulo}</p>
+        <p class="mt-4 mb-0 inline-block px-3 py-1 rounded-full bg-[#0097B2]/10 text-[13px] font-bold text-ink">Plazo: {programa.plazo}</p>
+
+        <div class="mt-8 rounded-[20px] bg-white border border-ink/[.08] shadow-card px-[clamp(20px,3vw,32px)] py-[clamp(18px,2.6vw,26px)]">
+          <p class="m-0 text-[12px] font-bold text-[#5C6B8A]">Es para vos si</p>
+          <p class="mt-2 mb-0 text-[clamp(18px,2vw,22px)] italic leading-[1.5] text-ink">"{programa.cuando}"</p>
+        </div>
+
+        <dl class="mt-10 m-0 border-t border-ink/[.08]">
+          {programa.detalle.map(([nombre, texto]) => (
+            <div class="grid gap-2 sm:grid-cols-[220px_1fr] sm:gap-8 py-6 border-b border-ink/[.08]">
+              <dt class="text-[14px] font-bold text-ink">{nombre}</dt>
+              <dd class="m-0 text-[15.5px] leading-[1.65] text-[#4A5568]">
+                {Array.isArray(texto) ? (
+                  <ul class="grid gap-2.5">
+                    {texto.map((linea) => {
+                      const corte = linea.indexOf(':');
+                      return (
+                        <li><strong class="font-semibold text-ink">{linea.slice(0, corte + 1)}</strong>{linea.slice(corte + 1)}</li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  texto
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <div class="relative overflow-hidden mt-12 rounded-[24px] p-[clamp(24px,3vw,44px)]" style="background:#0F2E6B">
+          <OndasFondo />
+          <div class="relative z-10">
+            <h2 class="m-0 max-w-[20ch] text-[clamp(24px,2.8vw,34px)] font-extrabold tracking-[-.5px] leading-[1.1] text-white">El diagnóstico no tiene costo.</h2>
+            <p class="mt-3 mb-0 max-w-[46ch] text-[16px] leading-[1.6] text-white/90">Treinta minutos para ponerle número a lo que hoy estás perdiendo.</p>
+            <a href={`/?programa=${programa.slug}#contacto`} class="mt-6 inline-flex items-center px-7 py-[14px] rounded-full bg-white text-ink text-[14px] font-bold hover:bg-white/90 transition">Reservar diagnóstico de 30 minutos</a>
+            <p class="mt-3 mb-0 text-[14px] text-white/90">Sin costo. Sin compromiso. Propuesta en 48 horas.</p>
+          </div>
+        </div>
+
+        <nav aria-label="Otros programas" class="mt-10">
+          <p class="m-0 text-[12px] font-bold tracking-[1.5px] uppercase text-[#5C6B8A]">Otros programas</p>
+          <ul class="mt-3 m-0 p-0 list-none flex flex-wrap gap-3">
+            {otros.map((otro) => (
+              <li>
+                <a href={`/programas/${otro.slug}`} class="inline-flex items-center gap-2 min-h-11 px-5 rounded-full border border-ink/15 bg-white text-[14px] font-semibold text-ink hover:border-brand-blue transition">
+                  <IconoPrograma numero={otro.numero} class="w-5 h-5 flex-none text-[#0097B2]" />
+                  {otro.nombre}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </main>
+    <Footer />
+    <WhatsAppButton />
+  </div>
+</Layout>

@@ -1,23 +1,27 @@
 ---
 import OndasFondo from './OndasFondo.astro';
+import { programas } from '../data/programas.js';
+
+const listaProgramas = JSON.stringify(programas.map((p) => [p.slug, p.nombre]));
 ---
-<section id="contacto" data-details-open="false" class="px-4 sm:px-8 lg:px-16 pt-0 pb-[clamp(32px,4vw,56px)]">
+<section id="contacto" data-details-open="false" data-programas={listaProgramas} class="px-4 sm:px-8 lg:px-16 pt-0 pb-[clamp(32px,4vw,56px)]">
   <div class="relative overflow-hidden max-w-[1200px] mx-auto rounded-[24px] p-[clamp(24px,3vw,44px)] grid gap-[clamp(24px,3vw,44px)] items-start" style="background:#0F2E6B;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">
     <OndasFondo />
     <div class="relative z-10">
-      <p class="mb-3.5 text-[10px] font-bold tracking-[3px] uppercase text-white/90 underline underline-offset-4 decoration-2">Contacto</p>
-      <h2 class="m-0 max-w-[20ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-1.8px] leading-[1.1] text-white">
-        Hablemos de lo que te está frenando.
+      <p class="mb-3.5 text-[12px] font-bold tracking-[3px] uppercase text-white/90 underline underline-offset-4 decoration-2">Contacto</p>
+      <h2 class="m-0 max-w-[20ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-.5px] leading-[1.1] text-white">
+        El diagnóstico no tiene costo.
       </h2>
-      <p class="mt-3 max-w-[46ch] text-[16px] leading-[1.6] text-white/90">Contanos qué pasa en tu empresa y veamos cómo ayudarte. La primera charla no tiene costo.</p>
+      <p class="mt-3 max-w-[46ch] text-[16px] leading-[1.6] text-white/90">Treinta minutos para ponerle número a lo que hoy estás perdiendo.</p>
+      <p class="mt-2 max-w-[46ch] text-[15px] leading-[1.6] text-white/90">Sin costo. Sin compromiso. Propuesta en 48 horas.</p>
 
       <div class="hidden sm:grid gap-3 mt-[clamp(20px,2.4vw,30px)]" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))">
-        <div class="bg-[rgba(240,111,203,.28)] rounded-[14px] px-[22px] py-5">
-          <div class="text-[clamp(30px,3.2vw,42px)] font-extrabold leading-none tracking-[-2px] text-white">30 min</div>
+        <div class="bg-[rgba(192,124,228,.28)] rounded-[14px] px-[22px] py-5">
+          <div class="text-[clamp(30px,3.2vw,42px)] font-extrabold leading-none tracking-[-.5px] text-white">30 min</div>
           <p class="mt-3 text-[16px] font-semibold text-white">Por videollamada</p>
         </div>
         <div class="bg-white/15 rounded-[14px] px-[22px] py-5">
-          <div class="text-[clamp(22px,2.2vw,28px)] font-extrabold leading-none tracking-[-1px] text-white">Propuesta en 48 hs</div>
+          <div class="text-[clamp(22px,2.2vw,28px)] font-extrabold leading-none tracking-[-.5px] text-white">Propuesta en 48 hs</div>
           <p class="mt-3 text-[16px] font-semibold text-white/90">Para decidir sin compromiso</p>
         </div>
       </div>
@@ -32,7 +36,8 @@ import OndasFondo from './OndasFondo.astro';
 
     <div class="bg-white rounded-[20px] p-[clamp(16px,2vw,22px)]">
       <div class="px-2 pt-1 pb-3">
-        <h3 class="m-0 text-[clamp(19px,1.8vw,23px)] font-bold tracking-[-.8px] text-ink">Elegí un horario</h3>
+        <p data-programa-elegido hidden class="mb-3 inline-flex flex-wrap items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0097B2]/10 text-[13px] font-bold text-ink">Programa elegido: <span data-programa-nombre></span></p>
+        <h3 class="m-0 text-[clamp(19px,1.8vw,23px)] font-bold tracking-[-.5px] text-ink">Elegí un horario</h3>
         <p class="mt-2 text-[15px] leading-[1.6] text-[#5C6B8A]">Por Google Meet. Confirmación por email.</p>
       </div>
       <div class="rounded-[14px] overflow-hidden border border-[rgba(12,22,48,.08)]">
