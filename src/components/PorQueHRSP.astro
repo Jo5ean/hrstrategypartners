@@ -1,16 +1,19 @@
 ---
-const filas = [
+const momentos = [
   {
-    diferencia: 'Resultados que podés mostrar',
-    gana: 'Medimos el impacto y lo documentamos bajo ISO 30414 para que puedas presentarlo al directorio.'
+    etiqueta: 'Antes de empezar',
+    titulo: 'Sabés qué estás contratando',
+    texto: 'Acordamos entregables y criterios de aceptación antes de empezar.'
   },
   {
-    diferencia: 'Nos ocupamos de implementarlo',
-    gana: 'Trabajamos con tu equipo hasta que los cambios estén funcionando.'
+    etiqueta: 'Mientras trabajamos',
+    titulo: 'Nos ocupamos de implementarlo',
+    texto: 'Trabajamos con tu equipo hasta que los cambios funcionan.'
   },
   {
-    diferencia: 'Sabés qué estás contratando',
-    gana: 'Acordamos entregables y criterios de aceptación antes de empezar. Si un entregable no cumple, lo reejecutamos sin costo.'
+    etiqueta: 'Al final',
+    titulo: 'Resultados que podés mostrar',
+    texto: 'Medimos el impacto y lo documentamos bajo ISO 30414, para presentarlo al directorio.'
   }
 ];
 ---
@@ -19,13 +22,21 @@ const filas = [
     <p class="mb-3.5 text-[12px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Por qué HR Strategy Partners</p>
     <h2 class="m-0 max-w-[22ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-.5px] leading-[1.04] text-ink">Lo que ganás con cada diferencia</h2>
 
-    <div data-reveal class="mt-[clamp(24px,2.8vw,36px)] grid gap-0 border-t border-ink/[.08]">
-      {filas.map((f) => (
-        <div class="grid gap-1.5 sm:grid-cols-[280px_1fr] sm:gap-8 py-6 border-b border-ink/[.08]">
-          <h3 class="m-0 text-[17px] font-bold text-ink">{f.diferencia}</h3>
-          <p class="m-0 max-w-[68ch] text-[15px] leading-[1.65] text-[#4A5568]">{f.gana}</p>
-        </div>
-      ))}
+    <div data-reveal class="mt-[clamp(24px,2.8vw,36px)]">
+      <ol class="m-0 p-0 list-none grid gap-8 md:grid-cols-3 md:gap-[clamp(24px,3vw,48px)]">
+        {momentos.map((m) => (
+          <li class="border-t-2 border-ink/[.12] pt-5">
+            <p class="m-0 text-[12px] font-bold tracking-[2px] uppercase text-brand-blue">{m.etiqueta}</p>
+            <h3 class="mt-3 m-0 text-[clamp(21px,2vw,26px)] font-extrabold leading-[1.2] tracking-[-.3px] text-ink">{m.titulo}</h3>
+            <p class="mt-2.5 m-0 max-w-[36ch] text-[15px] leading-[1.65] text-[#4A5568]">{m.texto}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="mt-[clamp(24px,2.8vw,36px)] rounded-[18px] bg-[#0F2E6B] px-[clamp(20px,2.6vw,36px)] py-[clamp(20px,2.4vw,30px)] text-white shadow-[0_12px_28px_rgba(15,46,107,.22)]">
+        <p class="m-0 text-[12px] font-bold tracking-[2.5px] uppercase text-white/80">Nuestra garantía</p>
+        <p class="mt-2 m-0 text-[clamp(20px,2.1vw,27px)] font-extrabold leading-[1.25] tracking-[-.3px]">Si un entregable no cumple, lo reejecutamos sin costo.</p>
+      </div>
     </div>
   </div>
 </section>

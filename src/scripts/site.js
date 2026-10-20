@@ -198,18 +198,6 @@ function initProgramaElegido() {
   });
 }
 
-function initPlanFinder() {
-  const root = document.querySelector('[data-plan-finder]');
-  const wa = document.querySelector('[data-whatsapp]');
-  if (!root || !wa) return;
-  const base = new URL(wa.href).searchParams.get('text') || '';
-  root.addEventListener('change', (e) => {
-    const choice = e.target.value;
-    const text = base.replace(/___$/, choice === 'Otro' ? '___' : choice.toLowerCase());
-    wa.href = 'https://wa.me/' + new URL(wa.href).pathname.slice(1) + '?text=' + encodeURIComponent(text);
-  });
-}
-
 function initContactDetails() {
   const section = document.querySelector('#contacto');
   const detailsToggle = section?.querySelector('[data-contact-details-toggle]');
@@ -372,7 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initStatsCarousel();
   initBarraReserva();
   initProgramaElegido();
-  initPlanFinder();
   initContactDetails();
   initResourceForm();
 });
