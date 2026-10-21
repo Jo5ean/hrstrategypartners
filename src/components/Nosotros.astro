@@ -10,7 +10,7 @@ const redes = [
     <p class="mb-3.5 text-[12px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Quién dirige</p>
 
     <div data-reveal class="grid gap-[clamp(20px,2.6vw,36px)] mt-[clamp(22px,2.6vw,34px)] items-stretch" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
-      <div class="relative rounded-[22px] overflow-hidden bg-[#0F2E6B] min-h-[clamp(320px,34vw,520px)]">
+      <div class="relative rounded-[22px] overflow-hidden bg-[#0F2E6B] min-h-[clamp(320px,34vw,520px)] max-md:min-h-[260px]">
         <img
           src="/images/carolina-navamuel.webp"
           alt="Carolina Navamuel, Fundadora y CEO de HR Strategy Partners"
@@ -20,20 +20,24 @@ const redes = [
         <div class="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-60" style="background:#0F2E6B" aria-hidden="true"></div>
         <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0C1630]/40 to-transparent" aria-hidden="true"></div>
       </div>
-      <div class="bg-white rounded-[22px] p-[clamp(22px,2.4vw,34px)] shadow-card">
+      <div class="group/bio bg-white rounded-[22px] p-[clamp(22px,2.4vw,34px)] shadow-card">
+        <input type="checkbox" id="bio-mas" class="sr-only md:hidden peer/bio" aria-label="Mostrar la biografía completa" />
         <h2 class="m-0 text-[clamp(26px,2.6vw,36px)] font-bold tracking-[-.5px] leading-[1.1] text-ink">Mgtr. Carolina Navamuel</h2>
         <p class="mt-2 text-[15px] leading-[1.6] font-semibold text-brand-blue">Fundadora & CEO</p>
 
         <div class="mt-5 grid gap-3.5 text-[15.5px] leading-[1.7] text-[#4A5568] [text-wrap:pretty]">
           <p class="m-0">Carolina Navamuel es CEO de HR Strategy Partners, firma desde la que aporta su experiencia en arquitectura y evolución organizacional a empresas de infraestructura, manufactura y servicios profesionales que enfrentan los desafíos estructurales propios del crecimiento: decisiones que se concentran, responsabilidades que se superponen y operaciones que dependen demasiado de determinadas personas.</p>
-          <p class="m-0">Durante más de 15 años trabajó en industrias donde una mala decisión estructural tiene un costo concreto: minería, petróleo y construcción.</p>
-          <p class="m-0">Es Magíster en Project Management, con especialización en Arquitectura Organizacional. Cuenta con certificaciones internacionales emitidas por EGCI (Escuela de Gerencia, Valencia), Grupo Doctrina Qualitas y Sabal University, y un Máster en Transformación Digital.</p>
+          <label for="bio-mas" class="md:hidden justify-self-start cursor-pointer text-[14px] font-bold text-brand-blue underline underline-offset-4 min-h-11 inline-flex items-center peer-focus-visible/bio:outline peer-focus-visible/bio:outline-2 peer-focus-visible/bio:outline-offset-2 peer-focus-visible/bio:outline-brand-blue">
+            <span class="group-has-[#bio-mas:checked]/bio:hidden">Leer más</span><span class="hidden group-has-[#bio-mas:checked]/bio:inline">Leer menos</span>
+          </label>
+          <p class="m-0 max-md:hidden group-has-[#bio-mas:checked]/bio:block">Durante más de 15 años trabajó en industrias donde una mala decisión estructural tiene un costo concreto: minería, petróleo y construcción.</p>
+          <p class="m-0 max-md:hidden group-has-[#bio-mas:checked]/bio:block">Es Magíster en Project Management, con especialización en Arquitectura Organizacional. Cuenta con certificaciones internacionales emitidas por EGCI (Escuela de Gerencia, Valencia), Grupo Doctrina Qualitas y Sabal University, y un Máster en Transformación Digital.</p>
         </div>
 
         <p class="mt-5 mb-0 text-[13px] font-bold text-[#5C6B8A]">Su trabajo parte de una premisa:</p>
         <blockquote class="mt-2 mb-0 pl-4 border-l-[3px] border-[#0097B2] text-[17px] italic font-medium leading-[1.55] text-ink">Una empresa no puede crecer de manera sostenible si su funcionamiento depende permanentemente de quienes la sostienen.</blockquote>
 
-        <p class="mt-5 mb-0 text-[15.5px] leading-[1.7] text-[#4A5568] [text-wrap:pretty]">Desde Salta, lidera proyectos de arquitectura y evolución organizacional con una metodología que combina Project Management, ISO 30414 y Topgrading, llevando cada intervención desde el diagnóstico hasta la implementación y la transferencia al equipo.</p>
+        <p class="mt-5 mb-0 text-[15.5px] leading-[1.7] text-[#4A5568] [text-wrap:pretty] max-md:hidden group-has-[#bio-mas:checked]/bio:block">Desde Salta, lidera proyectos de arquitectura y evolución organizacional con una metodología que combina Project Management, ISO 30414 y Topgrading, llevando cada intervención desde el diagnóstico hasta la implementación y la transferencia al equipo.</p>
 
         <ul class="mt-6 m-0 p-0 list-none flex flex-wrap gap-2.5">
           {redes.map((red) => (

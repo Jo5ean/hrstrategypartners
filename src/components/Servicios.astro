@@ -25,7 +25,7 @@ const ultimo = programas.length - 1;
             {i < ultimo && (
               <span aria-hidden="true" class="absolute left-5 top-12 -bottom-8 w-px bg-[#0097B2]/45 md:left-[calc(50%_+_20px)] md:right-[calc(-50%_-_4px)] md:top-5 md:bottom-auto md:h-px md:w-auto"></span>
             )}
-            <article data-reveal class:list={['relative overflow-hidden md:flex-1 flex flex-col rounded-[20px] p-[clamp(22px,2.4vw,30px)]', oscuro ? 'bg-[#0F2E6B] text-white' : 'bg-white border border-ink/[.08] text-ink shadow-card']}>
+            <article data-reveal class:list={['relative overflow-hidden md:flex-1 flex flex-col rounded-[20px] p-[clamp(22px,2.4vw,30px)] max-md:p-5', oscuro ? 'bg-[#0F2E6B] text-white' : 'bg-white border border-ink/[.08] text-ink shadow-card']}>
               {oscuro && <OndasFondo />}
               <div class="relative z-10 flex flex-col flex-1">
                 <div class="flex items-center gap-3">
@@ -38,10 +38,10 @@ const ultimo = programas.length - 1;
 
                 <p class:list={['mt-5 mb-0 text-[12px] font-bold', oscuro ? 'text-white/90' : 'text-[#5C6B8A]']}>Es para vos si</p>
                 <p class="mt-1 mb-0 text-[15px] italic leading-[1.55]">"{programa.cuando}"</p>
-                <p class:list={['mt-4 mb-0 text-[12px] font-bold', oscuro ? 'text-white/90' : 'text-[#5C6B8A]']}>Lo que ganás</p>
-                <p class:list={['mt-1 mb-0 text-[15px] leading-[1.55]', oscuro ? 'text-white/95' : 'text-[#4A5568]']}>{programa.gana}</p>
+                <p class:list={['mt-4 mb-0 text-[12px] font-bold max-md:hidden', oscuro ? 'text-white/90' : 'text-[#5C6B8A]']}>Lo que ganás</p>
+                <p class:list={['mt-1 mb-0 text-[15px] leading-[1.55] max-md:hidden', oscuro ? 'text-white/95' : 'text-[#4A5568]']}>{programa.gana}</p>
 
-                <div class="mt-auto pt-6">
+                <div class="mt-auto pt-6 max-md:pt-4">
                   <a href={`/programas/${programa.slug}`} class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13.5px] font-bold transition hover:opacity-90" style={`background:${boton};color:${botonTexto}`}>
                     Ver el programa
                     <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
