@@ -1,9 +1,9 @@
 ---
 const stats = [
-  { count: '-35/50', suffix: '%', label: 'de rotación crítica, documentada' },
-  { count: '+20', suffix: '%', label: 'de productividad, medida con KPIs auditables' },
-  { count: '15', suffix: ' hs', label: 'directivas liberadas por semana' },
-  { count: null, display: 'ISO 30414', label: 'informe final auditable por un tercero' }
+  { count: '-35/50', suffix: '%', label: 'de rotación crítica, documentada', corto: 'rotación crítica' },
+  { count: '+20', suffix: '%', label: 'de productividad, medida con KPIs auditables', corto: 'productividad' },
+  { count: '15', suffix: ' hs', label: 'directivas liberadas por semana', corto: 'directivas por semana' },
+  { count: null, display: 'ISO 30414', label: 'informe final auditable por un tercero', corto: 'auditable por terceros' }
 ];
 const statFootnote = 'Resultado comprometido en el Programa Estructura Express (12 semanas)';
 ---
@@ -56,23 +56,23 @@ const statFootnote = 'Resultado comprometido en el Programa Estructura Express (
       aria-roledescription="carrusel"
       aria-label="Resultados comprometidos"
       tabindex="0"
-      class="no-scrollbar flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth sm:grid sm:grid-cols-4 sm:gap-[clamp(10px,1.4vw,16px)] sm:overflow-visible sm:snap-none"
+      class="no-scrollbar grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-[clamp(10px,1.4vw,16px)]"
     >
       {stats.map((stat) => (
-        <div class="relative flex-none w-[76%] snap-start sm:w-auto rounded-[14px] p-[clamp(14px,1.4vw,18px)] max-sm:p-5 bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
+        <div class="relative rounded-[14px] p-[clamp(14px,1.4vw,18px)] max-sm:p-3.5 bg-[linear-gradient(155deg,rgba(255,255,255,.24),rgba(255,255,255,.09))] backdrop-blur-[22px] backdrop-saturate-[1.5] border border-white/[.38] shadow-[inset_0_1px_0_rgba(255,255,255,.5),0_20px_54px_rgba(0,0,0,.32)]">
           {stat.count ? (
             <div class="flex items-baseline gap-0.5">
-              <span class="text-[clamp(22px,min(2.8vw,4.2svh),34px)] max-sm:text-[40px] font-extrabold leading-none tracking-[-.5px] text-white">{stat.count}</span>
-              <span class="text-[16px] max-sm:text-[20px] font-extrabold leading-none text-white">{stat.suffix}</span>
+              <span class="text-[clamp(22px,min(2.8vw,4.2svh),34px)] max-sm:text-[26px] font-extrabold leading-none tracking-[-.5px] text-white">{stat.count}</span>
+              <span class="text-[16px] max-sm:text-[14px] font-extrabold leading-none text-white">{stat.suffix}</span>
             </div>
           ) : (
-            <div class="text-[clamp(19px,min(2.4vw,3.6svh),28px)] max-sm:text-[32px] font-extrabold leading-none tracking-[-.5px] text-white">{stat.display}</div>
+            <div class="text-[clamp(19px,min(2.4vw,3.6svh),28px)] max-sm:text-[22px] font-extrabold leading-none tracking-[-.5px] text-white">{stat.display}</div>
           )}
-          <p class="mt-[clamp(8px,1svh,11px)] max-sm:mt-3 text-[12.5px] max-sm:text-[15px] leading-[1.35] font-semibold text-white/85 [text-wrap:pretty]">{stat.label}</p>
+          <p class="mt-[clamp(8px,1svh,11px)] max-sm:mt-1.5 text-[12.5px] max-sm:text-[12px] leading-[1.3] font-semibold text-white/85 [text-wrap:pretty]"><span class="sm:hidden">{stat.corto}</span><span class="max-sm:hidden">{stat.label}</span></p>
         </div>
       ))}
     </div>
-    <div data-stats-dots class="sm:hidden flex justify-center gap-1 mt-2">
+    <div data-stats-dots class="hidden">
       {stats.map((_, i) => (
         <button type="button" aria-label={`Ver resultado ${i + 1} de ${stats.length}`} aria-current={i === 0 ? "true" : "false"} class="group grid place-items-center w-6 h-6">
           <span class="block w-2 h-2 rounded-full bg-white/40 transition-all duration-300 group-aria-[current=true]:w-5 group-aria-[current=true]:bg-white"></span>
@@ -80,7 +80,7 @@ const statFootnote = 'Resultado comprometido en el Programa Estructura Express (
       ))}
     </div>
   </div>
-  <p class="relative z-10 mt-3 max-w-[1020px] mx-auto w-full text-[12px] text-white/70 max-sm:text-center">{statFootnote}</p>
+  <p class="relative z-10 mt-3 max-w-[1020px] mx-auto w-full text-[12px] max-sm:text-[11px] max-sm:leading-[1.4] text-white/70 max-sm:text-center">{statFootnote}</p>
 </section>
 
 <style>

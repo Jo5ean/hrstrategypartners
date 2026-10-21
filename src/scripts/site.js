@@ -133,7 +133,7 @@ function initStatsCarousel() {
     timer = null;
   };
   const start = () => {
-    if (timer || !mobile.matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (timer || !mobile.matches || track.scrollWidth <= track.clientWidth + 4 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     timer = setInterval(() => {
       if (document.hidden || (window.scrollY || 0) > innerHeight * 0.5) return;
       goTo((active + 1) % cards.length);
