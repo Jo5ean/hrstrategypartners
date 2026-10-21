@@ -72,6 +72,19 @@ function initHeroVideo() {
     document.addEventListener(event, tryPlay, { capture: true, passive: true });
   });
   tryPlay();
+
+  // El navegador elige <source media> solo al cargar: si la ventana cambia de celular a escritorio
+  // (o al revés) hay que volver a cargar el video para que use el archivo que corresponde.
+  const celular = matchMedia('(max-width: 639px)');
+  let eraCelular = celular.matches;
+  const sincronizar = () => {
+    if (celular.matches === eraCelular) return;
+    eraCelular = celular.matches;
+    v.load();
+    tryPlay();
+  };
+  celular.addEventListener('change', sincronizar);
+  addEventListener('resize', sincronizar, { passive: true });
 }
 
 function initReveal() {

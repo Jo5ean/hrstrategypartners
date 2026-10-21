@@ -42,10 +42,10 @@ const diaADia = [
     <ol data-reveal class="m-0 p-0 list-none mt-[clamp(28px,3.2vw,44px)] max-w-[1040px]">
       {filas.map((f, i) => (
         <li class="grid grid-cols-[22px_1fr] md:grid-cols-[minmax(150px,.42fr)_26px_1fr] gap-x-4 md:gap-x-[clamp(20px,2.4vw,32px)]">
-          <p class="m-0 col-start-2 row-start-1 md:col-start-1 md:text-right text-[clamp(20px,1.9vw,25px)] font-extrabold leading-[1.15] tracking-[-.3px] text-brand-blue">{f.cuando}</p>
+          <p class="m-0 col-start-2 row-start-1 md:col-start-1 md:text-right text-[clamp(20px,1.9vw,25px)] font-extrabold leading-[1.15] tracking-[-.3px] text-brand-violet">{f.cuando}</p>
           <div class="relative col-start-1 row-start-1 row-span-2 md:col-start-2 md:row-span-1" aria-hidden="true">
-            <span class:list={['absolute left-1/2 w-px -translate-x-1/2 bg-brand-blue/40', i === 0 ? 'top-[13px]' : 'top-0', i === filas.length - 1 ? 'h-[13px]' : 'bottom-0']}></span>
-            <span class="absolute left-1/2 top-[7px] w-[13px] h-[13px] -translate-x-1/2 rounded-full bg-white border-[3px] border-brand-blue"></span>
+            <span class:list={['absolute left-1/2 w-px -translate-x-1/2 bg-brand-violet/40', i === 0 ? 'top-[13px]' : 'top-0', i === filas.length - 1 ? 'h-[13px]' : 'bottom-0']}></span>
+            <span class="absolute left-1/2 top-[7px] w-[13px] h-[13px] -translate-x-1/2 rounded-full bg-white border-[3px] border-brand-violet"></span>
           </div>
           <div class:list={['col-start-2 row-start-2 md:col-start-3 md:row-start-1', i === filas.length - 1 ? '' : 'pb-[clamp(28px,3vw,40px)]']}>
             <p class="m-0 text-[14.5px] leading-[1.6] text-[#7A869C]"><span class="font-bold text-[11.5px] tracking-[1.2px] uppercase mr-1.5">Hoy:</span><span class="decoration-ink/25 line-through decoration-1">{f.antes}</span></p>
