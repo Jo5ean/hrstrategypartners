@@ -6,23 +6,23 @@ const programa = { plazo: 'Todo el programa', titulo: 'Ves los avances', texto: 
 const cierre = { plazo: 'Al cerrar', titulo: 'El sistema queda en tu empresa', texto: 'Tu equipo recibe las herramientas y la documentación para sostener lo logrado.' };
 
 // Un conjunto se levanta cuando el mouse está sobre su propia columna (hija directa con data-col).
-const conjunto = 'flex flex-col lg:flex-row gap-[clamp(8px,1vw,14px)] p-[clamp(8px,1vw,14px)] transition duration-200 ease-out motion-safe:[&:has(>[data-col]:hover)]:-translate-y-1 [&:has(>[data-col]:hover)]:shadow-[0_22px_48px_rgba(15,46,107,.24)]';
-const col = 'group/col min-w-0 lg:basis-0 lg:grow rounded-[12px] p-[clamp(10px,1vw,16px)]';
+const conjunto = 'flex flex-col xl:flex-row gap-[clamp(8px,1vw,14px)] p-[clamp(8px,1vw,14px)] transition duration-200 ease-out motion-safe:[&:has(>[data-col]:hover)]:-translate-y-1 [&:has(>[data-col]:hover)]:shadow-[0_22px_48px_rgba(15,46,107,.24)]';
+const col = 'group/col min-w-0 xl:basis-0 xl:grow rounded-[12px] p-[clamp(10px,1vw,16px)]';
 const solida = 'transition duration-200 ease-out shadow-[0_8px_20px_rgba(15,46,107,.28)] hover:shadow-[0_20px_40px_rgba(15,46,107,.40)] motion-safe:hover:-translate-y-1';
 const zoom = 'origin-top-left transition-transform duration-200 ease-out motion-safe:group-hover/col:scale-[1.05]';
 const plazoCls = 'm-0 text-[clamp(18px,1.7vw,23px)] font-extrabold leading-[1.15] tracking-[-.3px]';
 const tituloCls = 'mt-2 m-0 text-[17px] font-bold leading-[1.3]';
 const textoCls = 'mt-1.5 m-0 text-[14.5px] leading-[1.6]';
 ---
-<section id="como-trabajamos" class="bg-white px-4 sm:px-8 lg:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
+<section id="como-trabajamos" class="bg-white px-4 sm:px-8 xl:px-16 pt-[clamp(24px,3vw,40px)] pb-[clamp(40px,4.4vw,64px)]">
   <div class="max-w-[1200px] mx-auto">
     <p class="mb-3.5 text-[12px] font-bold tracking-[3px] uppercase text-brand-blue underline underline-offset-4 decoration-2">Cómo trabajamos</p>
     <h2 class="m-0 max-w-[20ch] text-[clamp(26px,2.9vw,38px)] font-extrabold tracking-[-.5px] leading-[1.04] text-ink">Un solo camino. Sin sorpresas.</h2>
     <p class="mt-3.5 max-w-[60ch] text-[15.5px] leading-[1.7] text-[#4A5568]">Todo cuenta desde la primera reunión: cada plazo está dentro del siguiente.</p>
 
     <div data-reveal class:list={['mt-[clamp(24px,2.8vw,36px)] rounded-[24px] bg-brand-blue/[.06] shadow-[0_12px_32px_rgba(15,46,107,.10)]', conjunto]}>
-      <div class:list={['rounded-[20px] bg-brand-blue/[.08] shadow-[0_8px_22px_rgba(15,46,107,.12)] lg:basis-0 lg:grow-[3.35]', conjunto]}>
-        <div class:list={['rounded-[16px] bg-brand-blue/[.10] shadow-[0_6px_16px_rgba(15,46,107,.14)] lg:basis-0 lg:grow-[2.2]', conjunto]}>
+      <div class:list={['rounded-[20px] bg-brand-blue/[.08] shadow-[0_8px_22px_rgba(15,46,107,.12)] xl:basis-0 xl:grow-[3.35]', conjunto]}>
+        <div class:list={['rounded-[16px] bg-brand-blue/[.10] shadow-[0_6px_16px_rgba(15,46,107,.14)] xl:basis-0 xl:grow-[2.2]', conjunto]}>
           <div class:list={['flex bg-brand-blue text-white', col, solida]}>
             <div class:list={[zoom]}>
               <p class:list={[plazoCls]}>{reunion.plazo}</p>

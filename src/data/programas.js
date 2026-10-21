@@ -1,6 +1,7 @@
 export const programas = [
   {
     slug: 'auditoria-de-salud-organizacional',
+    imagen: '/images/programas/auditoria.webp',
     numero: 1,
     nivel: 'Diagnóstico',
     nombre: 'Auditoría de Salud Organizacional',
@@ -20,6 +21,7 @@ export const programas = [
   },
   {
     slug: 'programa-estructura-express',
+    imagen: '/images/programas/express.webp',
     numero: 2,
     nivel: 'Transformación',
     nombre: 'Programa Estructura Express',
@@ -46,6 +48,8 @@ export const programas = [
   },
   {
     slug: 'capacidad-permanente',
+    imagen: '/images/programas/capacidad.webp',
+    imagenPosicion: '40% 8%',
     numero: 3,
     nivel: 'Capacidad permanente',
     nombre: 'Fractional CPO',
