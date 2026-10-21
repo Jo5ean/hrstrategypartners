@@ -30,6 +30,12 @@ export const programas = [
     descripcion: 'Del caos al sistema en 12 semanas. Diagnóstico de 30 minutos, sin costo.',
     cuando: 'Sé dónde pierdo capacidad: necesito que se resuelva y funcione, no más análisis.',
     gana: 'Rotación crítica −35/50% documentada · productividad +20% medida con KPIs auditables · 15 horas directivas liberadas por semana · un sistema que tu empresa opera sola.',
+    ganasDatos: [
+      { valor: '−35/50%', texto: 'de rotación crítica, documentada' },
+      { valor: '+20%', texto: 'de productividad, medida con KPIs auditables' },
+      { valor: '+15 hs', texto: 'directivas liberadas por semana' },
+      { destacado: 'Un sistema que tu empresa opera sola.' }
+    ],
     detalle: [
       ['Qué hacemos, semana a semana', [
         'Semanas 1–2: Mapa de Riesgos y Gap Analysis con impacto económico.',
