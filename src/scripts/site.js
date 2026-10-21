@@ -133,7 +133,7 @@ function initStatsCarousel() {
     timer = null;
   };
   const start = () => {
-    if (timer || !mobile.matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (timer || !mobile.matches || track.scrollWidth <= track.clientWidth + 4 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     timer = setInterval(() => {
       if (document.hidden || (window.scrollY || 0) > innerHeight * 0.5) return;
       goTo((active + 1) % cards.length);
@@ -195,18 +195,6 @@ function initProgramaElegido() {
     const u = new URL(a.href);
     const text = (u.searchParams.get('text') || '').replace(/(minutos|HR Strategy Partners)\.(\s|$)/, `$1. Me interesa: ${nombre}.$2`);
     a.href = u.origin + u.pathname + '?text=' + encodeURIComponent(text);
-  });
-}
-
-function initPlanFinder() {
-  const root = document.querySelector('[data-plan-finder]');
-  const wa = document.querySelector('[data-whatsapp]');
-  if (!root || !wa) return;
-  const base = new URL(wa.href).searchParams.get('text') || '';
-  root.addEventListener('change', (e) => {
-    const choice = e.target.value;
-    const text = base.replace(/___$/, choice === 'Otro' ? '___' : choice.toLowerCase());
-    wa.href = 'https://wa.me/' + new URL(wa.href).pathname.slice(1) + '?text=' + encodeURIComponent(text);
   });
 }
 
@@ -372,7 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initStatsCarousel();
   initBarraReserva();
   initProgramaElegido();
-  initPlanFinder();
   initContactDetails();
   initResourceForm();
 });

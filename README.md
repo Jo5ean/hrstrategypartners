@@ -21,7 +21,6 @@ src/
     Header.astro         # nav sticky + CTA "Agendar diagnóstico"
     Hero.astro            # video + titular + métricas + carrusel "Además"
     Servicios.astro       # 5 tarjetas de programas
-    PlanFinder.astro      # chat asistente "¿No sabés cuál programa es para vos?"
     Metodologia.astro     # timeline horizontal conectada (4 pasos)
     Nosotros.astro        # retrato + bio de Carolina
     Resultados.astro      # 3 testimonios con avatar
